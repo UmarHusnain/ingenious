@@ -1,24 +1,37 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './core/components/home/home.component';
-import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
-import { AboutComponent } from './core/components/about/about.component';
-import { ContactComponent } from './core/components/contact/contact.component';
-import { SmartLightingComponent } from './core/components/smart-lighting/smart-lighting.component';
-import { SmartGardenComponent } from './core/components/smart-garden/smart-garden.component';
-import { SurveillanceSecurityComponent } from './core/components/surveillance-security/surveillance-security.component';
-import { EnergyManagementComponent } from './core/components/energy-management/energy-management.component';
-import { ClimateControlComponent } from './core/components/climate-control/climate-control.component';
-import { WaterManagementComponent } from './core/components/water-management/water-management.component';
-import { PriceCalculatorComponent } from './core/components/price-calculator/price-calculator.component';
-import { ShopListComponent } from './core/components/shop-list/shop-list.component';
-import { CartComponent } from './core/components/cart/cart.component';
-import { CheckoutComponent } from './core/components/checkout/checkout.component';
-import { ProductDetailComponent } from './core/components/product-detail/product-detail.component';
+import { HomeComponent } from './core/user-panel/components/home/home.component';
+import { AboutComponent } from './core/user-panel/components/about/about.component';
+import { ContactComponent } from './core/user-panel/components/contact/contact.component';
+import { SmartLightingComponent } from './core/user-panel/components/smart-lighting/smart-lighting.component';
+import { SmartGardenComponent } from './core/user-panel/components/smart-garden/smart-garden.component';
+import { SurveillanceSecurityComponent } from './core/user-panel/components/surveillance-security/surveillance-security.component';
+import { EnergyManagementComponent } from './core/user-panel/components/energy-management/energy-management.component';
+import { ClimateControlComponent } from './core/user-panel/components/climate-control/climate-control.component';
+import { WaterManagementComponent } from './core/user-panel/components/water-management/water-management.component';
+import { PriceCalculatorComponent } from './core/user-panel/components/price-calculator/price-calculator.component';
+import { ShopListComponent } from './core/user-panel/components/shop-list/shop-list.component';
+import { CartComponent } from './core/user-panel/components/cart/cart.component';
+import { CheckoutComponent } from './core/user-panel/components/checkout/checkout.component';
+import { ProductDetailComponent } from './core/user-panel/components/product-detail/product-detail.component';
+import { UserLayoutComponent } from './layout/user-layout/user-layout.component';
+import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 
 export const routes: Routes = [
   {
+    path: 'admin',
+    component: AdminLayoutComponent,
+    children: [
+      // {
+      //   path: '',
+      //   component: HomeComponent,
+      // },
+    ]
+  },
+
+
+  {
     path: '',
-    component: MainLayoutComponent,
+    component: UserLayoutComponent,
     children: [
       {
         path: '',

@@ -1,6 +1,4 @@
 import { Component, Inject, Renderer2, OnDestroy } from '@angular/core';
-import { FooterComponent } from '../../shared/components/footer/footer.component';
-import { HeaderComponent } from '../../shared/components/header/header.component';
 import {
   RouterModule,
   RouterOutlet,
@@ -9,21 +7,21 @@ import {
 } from '@angular/router';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { FooterComponent } from '../../shared/components/footer/footer.component';
+import { HeaderComponent } from '../../shared/components/header/header.component';
 
 @Component({
-  selector: 'app-main-layout',
+  selector: 'app-user-layout',
   standalone: true,
-  imports: [
-    FooterComponent,
-    HeaderComponent,
-    RouterModule,
-    RouterOutlet,
-    CommonModule,
-  ],
-  templateUrl: './main-layout.component.html',
-  styleUrls: ['./main-layout.component.scss'],
+  imports: [ FooterComponent,
+      HeaderComponent,
+      RouterModule,
+      RouterOutlet,
+      CommonModule,],
+  templateUrl: './user-layout.component.html',
+  styleUrl: './user-layout.component.scss'
 })
-export class MainLayoutComponent implements OnDestroy {
+export class UserLayoutComponent implements OnDestroy {
   private routerSubscription!: Subscription;
 
   constructor(
@@ -80,47 +78,13 @@ export class MainLayoutComponent implements OnDestroy {
     this.renderer.appendChild(this.document.head, favicon2);
   }
 
-  // loadScripts(): void {
-  //   const scripts = [
-  //     'assets/js/jquery.js',
-  //     'assets/js/popper.min.js',
-  //     'assets/js/bootstrap.min.js',
-  //     'assets/plugins/revolution/js/jquery.themepunch.revolution.min.js',
-  //     'assets/plugins/revolution/js/jquery.themepunch.tools.min.js',
-  //     'assets/plugins/revolution/js/extensions/revolution.extension.actions.min.js',
-  //     'assets/plugins/revolution/js/extensions/revolution.extension.carousel.min.js',
-  //     'assets/plugins/revolution/js/extensions/revolution.extension.kenburn.min.js',
-  //     'assets/plugins/revolution/js/extensions/revolution.extension.layeranimation.min.js',
-  //     'assets/plugins/revolution/js/extensions/revolution.extension.migration.min.js',
-  //     'assets/plugins/revolution/js/extensions/revolution.extension.navigation.min.js',
-  //     'assets/plugins/revolution/js/extensions/revolution.extension.parallax.min.js',
-  //     'assets/plugins/revolution/js/extensions/revolution.extension.slideanims.min.js',
-  //     'assets/plugins/revolution/js/extensions/revolution.extension.video.min.js',
-  //     'assets/js/main-slider-script.js',
-  //     'assets/js/knob.js',
-  //     'assets/js/jquery.fancybox.js',
-  //     'assets/js/owl.js',
-  //     'assets/js/wow.js',
-  //     'assets/js/appear.js',
-  //     'assets/js/script.js',
-  //   ];
-
-  //   scripts.forEach((scriptUrl) => this.loadScript(scriptUrl));
-  // }
-
-  // loadScript(src: string): void {
-  //   const script = this.renderer.createElement('script');
-  //   script.src = src;
-  //   script.type = 'text/javascript';
-  //   this.renderer.appendChild(this.document.body, script);
-  // }
   loadScripts(): void {
     this.loadScript('assets/js/jquery.js', () => {
       this.loadScript('assets/js/popper.min.js', () => {
         this.loadScript('assets/js/bootstrap.min.js', () => {
           this.loadScript('assets/plugins/revolution/js/jquery.themepunch.revolution.min.js', () => {
             this.loadScript('assets/plugins/revolution/js/jquery.themepunch.tools.min.js', () => {
-              this.loadRemainingScripts(); // Load the rest after these are loaded
+              this.loadRemainingScripts(); 
             });
           });
         });
@@ -172,4 +136,5 @@ export class MainLayoutComponent implements OnDestroy {
     // Re-load all scripts
     this.loadScripts();
   }
+
 }
