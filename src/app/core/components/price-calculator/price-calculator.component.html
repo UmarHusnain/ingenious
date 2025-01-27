@@ -1,0 +1,63 @@
+   <!--Page Title-->
+   <section class="page-title">
+    <div class="cws-image-bg" style="background-image: url(assets/images/background/30.jpg)">
+        <div class="cws-overlay-bg"></div>
+    </div>
+
+    <div class="auto-container">
+        <h1>Price Calculator</h1>
+        <ul class="page-breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li>Price Calculator</li>
+        </ul>
+    </div>
+</section>
+<!--End Page Title-->
+
+<section class="about-section">
+  <div class="calculator">
+    <div *ngFor="let step of steps; let i = index" [class.active]="i === currentStep" class="step">
+      <h2>{{ step.title }}</h2>
+      <div *ngIf="step.type === 'options'" class="options">
+        <div
+          *ngFor="let option of step.options"
+          class="option"
+          [class.selected]="selectedOptions[step.id] === option.value"
+          (click)="selectOption(step.id, option.value)"
+        >
+          {{ option.label }}
+        </div>
+      </div>
+
+      <div *ngIf="step.type === 'counter'" class="room-types">
+        <div *ngFor="let room of step.options">
+          <p>{{ room.label }}</p>
+          <div class="counter">
+            <button (click)="updateCounter(room.value, -1)">-</button>
+            <span>{{ roomCounts[room.value] || 0 }}</span>
+            <button (click)="updateCounter(room.value, 1)">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="step.type === 'final'" class="final">
+        <h2>{{ step.title }}</h2>
+        <p>{{ step.description }}</p>
+        <p><small>{{ step.note }}</small></p>
+        <div class="cost-range">
+          <span id="cost-min">PKR {{ costRange.min }}</span>
+          <span> - </span>
+          <span id="cost-max">PKR {{ costRange.max }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button class="button secondary" [disabled]="currentStep === 0" (click)="prevStep()">Back</button>
+      <button class="button" (click)="nextStep()">{{ currentStep === steps.length - 1 ? 'Finish' : 'Next' }}</button>
+    </div>
+  </div>
+
+  <!-- Background Layers -->
+   </section>
+
