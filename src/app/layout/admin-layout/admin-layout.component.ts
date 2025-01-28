@@ -64,7 +64,6 @@ export class AdminLayoutComponent implements OnDestroy {
       "./assets/adminAssets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css",
       "./assets/adminAssets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css",
       "./assets/adminAssets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css",
-
       "./assets/adminAssets/dist/css/adminlte.min.css",
       "./assets/adminAssets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
       "./assets/adminAssets/plugins/daterangepicker/daterangepicker.css",
