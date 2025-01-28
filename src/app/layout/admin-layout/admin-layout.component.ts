@@ -11,6 +11,9 @@ import {
 } from '@angular/router';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { Subscription } from 'rxjs';
+
+declare let $: any;
+
 @Component({
   selector: 'app-admin-layout',
   standalone: true,
@@ -20,6 +23,7 @@ import { Subscription } from 'rxjs';
 })
 export class AdminLayoutComponent implements OnDestroy {
   private routerSubscription!: Subscription;
+  scriptsLoaded = false;
 
   constructor(
     private renderer: Renderer2,
@@ -29,8 +33,22 @@ export class AdminLayoutComponent implements OnDestroy {
 
   ngOnInit(): void {
     this.loadStyles();
-    // this.loadScripts();
+    this.loadAdminScripts()
+      .then(() => {
+        console.log('All Admin scripts loaded successfully.');
+        this.initializeDataTables();
+        this.scriptsLoaded = true;
+      })
+      .catch((err) => {
+        console.error('Error loading Admin scripts:', err);
+      });
   }
+
+  // ngAfterViewInit(): void {
+  //   setTimeout(() => {
+  //     this.initializeDataTables();
+  //   }, 500);
+  // }
 
   ngOnDestroy(): void {
     // Clean up the subscription when the component is destroyed
@@ -91,41 +109,55 @@ export class AdminLayoutComponent implements OnDestroy {
   }
 
 
-  loadScripts(): void {
-    this.loadScript("assets/adminAssets/plugins/jquery/jquery.min.js")
-      .then(() => {
-        this.loadScript("assets/adminAssets/plugins/bootstrap/js/bootstrap.bundle.min.js")
-          .then(() => {
-                // Load other scripts here if needed
-                this.loadScript("assets/adminAssets/plugins/datatables/jquery.dataTables.min.js");
-                this.loadScript("assets/adminAssets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js");
-                this.loadScript("assets/adminAssets/plugins/datatables-responsive/js/dataTables.responsive.min.js");
-                this.loadScript("assets/adminAssets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js");
-                this.loadScript("assets/adminAssets/plugins/datatables-buttons/js/dataTables.buttons.min.js");
-                this.loadScript("assets/adminAssets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js");
-                this.loadScript("assets/adminAssets/plugins/jszip/jszip.min.js");
-                this.loadScript("assets/adminAssets/plugins/pdfmake/pdfmake.min.js");
-                this.loadScript("assets/adminAssets/plugins/pdfmake/vfs_fonts.js");
-                this.loadScript("assets/adminAssets/plugins/datatables-buttons/js/buttons.html5.min.js");
-                this.loadScript("assets/adminAssets/plugins/datatables-buttons/js/buttons.print.min.js");
-                this.loadScript("assets/adminAssets/plugins/datatables-buttons/js/buttons.colVis.min.js");
-                this.loadScript("assets/adminAssets/dist/js/adminlte.min.js");
-                this.loadScript("assets/adminAssets/dist/js/demo.js");
-          });
-      });
+  private loadAdminScripts(): Promise<void> {
+    // We need to load jQuery, then bootstrap.bundle, then DataTables, etc.
+    // We’ll chain promises for correct loading order.
+
+    return this.loadScript('./assets/adminAssets/plugins/jquery/jquery.min.js')
+      .then(() => this.loadScript('./assets/adminAssets/plugins/bootstrap/js/bootstrap.bundle.min.js'))
+      .then(() => this.loadScript('./assets/adminAssets/plugins/datatables/jquery.dataTables.min.js'))
+      .then(() => this.loadScript('./assets/adminAssets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js'))
+      .then(() => this.loadScript('./assets/adminAssets/plugins/datatables-responsive/js/dataTables.responsive.min.js'))
+      .then(() => this.loadScript('./assets/adminAssets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js'))
+      .then(() => this.loadScript('./assets/adminAssets/plugins/datatables-buttons/js/dataTables.buttons.min.js'))
+      .then(() => this.loadScript('./assets/adminAssets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js'))
+      .then(() => this.loadScript('./assets/adminAssets/plugins/jszip/jszip.min.js'))
+      .then(() => this.loadScript('./assets/adminAssets/plugins/pdfmake/pdfmake.min.js'))
+      .then(() => this.loadScript('./assets/adminAssets/plugins/pdfmake/vfs_fonts.js'))
+      .then(() => this.loadScript('./assets/adminAssets/plugins/datatables-buttons/js/buttons.html5.min.js'))
+      .then(() => this.loadScript('./assets/adminAssets/plugins/datatables-buttons/js/buttons.print.min.js'))
+      .then(() => this.loadScript('./assets/adminAssets/plugins/datatables-buttons/js/buttons.colVis.min.js'))
+      .then(() => this.loadScript('./assets/adminAssets/dist/js/adminlte.min.js'))
+      .then(() => this.loadScript('./assets/adminAssets/dist/js/demo.js'))
+      .then(() => Promise.resolve()); // Return a resolved promise at the end
   }
 
-  loadScript(src: string): Promise<any> {
-    return new Promise((resolve, reject) => {
+  private loadScript(src: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
       const script = this.renderer.createElement('script');
-      script.src = src;
       script.type = 'text/javascript';
-      script.onload = resolve;
-      script.onerror = reject;
+      script.src = src;
+      script.onload = () => resolve();
+      script.onerror = (err:any) => reject(err);
       this.renderer.appendChild(this.document.body, script);
     });
   }
+  initializeDataTables() {
+    if (typeof $ === 'undefined') {
+      console.warn('jQuery not available yet');
+      return;
+    }
 
+    // Example of enabling DataTables on #example1
+    $('#example1').DataTable({
+      responsive: true,
+      lengthChange: false,
+      autoWidth: false,
+      buttons: ['copy', 'csv', 'excel', 'pdf', 'print', 'colvis']
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+    // If you have another table: #example2, do it similarly
+  }
 
 
   // loadScripts(): void {
