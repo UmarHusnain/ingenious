@@ -15,7 +15,11 @@ import { CheckoutComponent } from './core/user-panel/components/checkout/checkou
 import { ProductDetailComponent } from './core/user-panel/components/product-detail/product-detail.component';
 import { UserLayoutComponent } from './layout/user-layout/user-layout.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
-
+import { DashboardComponent } from './core/Admin-panel/Components/dashboard/dashboard.component';
+import { UserComponent } from './core/Admin-panel/Components/user/user.component';
+import { SigninComponent } from './core/auth/components/signin/signin.component';
+import { SignupComponent } from './core/auth/components/signup/signup.component';
+import { CategoriesComponent } from './core/Admin-panel/Components/categories/categories.component';
 export const routes: Routes = [
   {
     path: 'admin',
@@ -25,9 +29,28 @@ export const routes: Routes = [
       //   path: '',
       //   component: HomeComponent,
       // },
+       {
+        path: '',
+        component: DashboardComponent,
+      },
+      {
+        path: 'user',
+        component: UserComponent,
+      },
+      {
+        path: 'categories',
+        component: CategoriesComponent,
+      },
     ]
   },
-
+  {
+    path: 'login',
+    component: SigninComponent,
+  },
+  {
+    path: 'register',
+    component: SignupComponent,
+  },
 
   {
     path: '',
