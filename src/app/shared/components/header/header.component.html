@@ -1,10 +1,10 @@
-  <!-- Main Header-->
-  <header class="main-header" >
+<!-- Main Header-->
+<header class="main-header">
     <!-- Main box -->
     <div class="main-box">
         <div class="menu-box">
             <div class="logo"><a routerLink="/"><img src="assets/images/logo.png" alt="" title=""
-                        srcset="assets/images/logo-white-big.png 2x"></a></div>
+                        srcset="assets/images/logo.png 2x"></a></div>
 
             <!--Nav Box-->
             <div class="nav-outer">
@@ -29,20 +29,56 @@
                             <li><a routerLink="/about">About Us</a></li>
                             <li><a routerLink="/contact">Contacts</a></li>
                             <li class=" dropdown">
-                              <a routerLink="/shop"><span>Shop</span></a>
-                              <ul>
-                                  <li><a routerLink="/shop">Shop</a></li>
-                                  <li><a routerLink="/cart">Cart</a></li>
-                                  <li><a routerLink="/checkout">Checkout</a>
+                                <a routerLink="/shop"><span>Shop</span></a>
+                                <ul>
+                                    <li><a routerLink="/shop">Shop</a></li>
+                                    <li><a routerLink="/cart">Cart</a></li>
+                                    <li><a routerLink="/checkout">Checkout</a>
 
-                              </ul>
-                          </li>
+                                </ul>
+                            </li>
                             <li><a routerLink="/price-calculator">Price Calculator</a></li>
 
                         </ul>
                     </div>
                 </nav>
                 <!-- Main Menu End-->
+                <div class="outer-box clearfix">
+
+                    <div class="cart-btn" [ngClass]="{'scroll-enabled': cartItems.length > 3}">
+                        <a routerLink="/cart">
+                            <i class="icon flaticon-shopping-cart-empty-side-view"></i>
+                            <span class="count">{{ cartItems.length }}</span>
+                        </a>
+
+                        <!-- Shopping Cart Dropdown -->
+                        <div class="shopping-cart" *ngIf="cartItems.length > 0">
+                            <ul class="shopping-cart-items">
+                                <li class="cart-item" *ngFor="let item of cartItems">
+                                    <img src="assets/images/resource/item-thumb-2.jpg" alt="#" class="thumb" />
+                                    <span class="item-name">{{ item.productName }}</span>
+                                    <span class="item-quantity">{{ item.quantity }} x
+                                        <span class="item-amount">Rs. {{ item.price }}</span>
+                                    </span>
+                                    <a routerLink="/product-detail" class="product-detail"></a>
+                                    <button class="remove-item"
+                                        (click)="openConfirmationModel(confirmationModal, item.cartId, item.aspNetUserId)">
+                                        <span class="fa fa-times"></span>
+                                    </button>
+                                </li>
+                            </ul>
+
+                            <div class="cart-footer">
+                                <div class="shopping-cart-total">
+                                    <strong>Total:</strong> Rs. {{ totalAmount }}
+                                </div>
+                                <a routerLink="/cart" class="theme-btn">View Cart</a>
+                                <a (click)="proceedToCheckout()" class="theme-btn">Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
@@ -86,3 +122,45 @@
 
 </header>
 <!--End Main Header -->
+@if (isLoading) {
+<div class="spinner-overlay">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+}
+
+
+@if (showAlert) {
+<div style="z-index: 999999;" class="alert alert-dismissible fade show center-alert"
+    [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
+    {{ alertMessage }}
+    <button type="button" class="btn-close" aria-label="Close" (click)="closePopupMsg()"></button>
+</div>
+}
+
+<!-- delete cart modal -->
+<ng-template #confirmationModal data-bs-backdrop="non" let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h5 class="modal-title">Confirm Deletion</h5>
+        <button type="button" class="close" (click)="d('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <p>Are you sure you want to delete this product?</p>
+        <small>This action cannot be undone.</small>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')"
+            style="color: #FFFFFF; background: green; border: none;">
+            Go back
+        </button>
+        <button type="button" class="btn btn-outline-dark" (click)="c('yes')"
+            style="color: #FF005C; border: 1px solid #FF005C; background: none;">
+            Delete
+        </button>
+    </div>
+</ng-template>

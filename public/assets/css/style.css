@@ -11009,7 +11009,7 @@ clip-path: polygon(0% 120px, 50% 60px, 100% 0%, 100% 100%, 50% calc(100% - 60px)
 	padding:30px 20px;
 	font-size: 17px;
 	font-weight: 500;
-	text-align:center;
+	text-align:left;
 }
 
 .cart-table .cart-header .product-name{
@@ -11018,11 +11018,11 @@ clip-path: polygon(0% 120px, 50% 60px, 100% 0%, 100% 100%, 50% calc(100% - 60px)
 
 .cart-table th,
 .cart-table td {
-    padding: 30px 20px;
+    padding: 15px 20px;
     vertical-align: middle;
     border-left: 0;
     border-right: 0;
-    text-align: center;
+    text-align: left;
 	font-size: 17px;
 	font-weight: 400;
 	color: inherit;

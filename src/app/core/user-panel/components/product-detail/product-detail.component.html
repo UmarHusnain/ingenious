@@ -1,187 +1,242 @@
-    <!--Page Title-->
-    <section class="page-title">
-      <!-- Background Layers -->
-      <div class="background-layers">
-          <div class="cws-image-bg" style="background-image: url(assets/images/background/37.jpg)">
-              <div class="cws-overlay-bg"></div>
-          </div>
-      </div>
+<!--Page Title-->
+<section class="page-title">
+    <!-- Background Layers -->
+    <div class="background-layers">
+        <div class="cws-image-bg" style="background-image: url(assets/images/background/37.jpg)">
+            <div class="cws-overlay-bg"></div>
+        </div>
+    </div>
 
-      <div class="auto-container">
-          <h1>Product Detail</h1>
-          <ul class="page-breadcrumb">
-              <li><a routerLink="/">Home</a></li>
-              <li>Product Detail</li>
-          </ul>
-      </div>
-  </section>
-  <!--End Page Title-->
+    @if (isLoading) {
+    <div class="spinner-overlay">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    }
 
-  <!--Sidebar Page Container-->
-  <div class="sidebar-page-container">
-      <div class="auto-container">
-          <div class="row clearfix">
-              <!--Content Side-->
-              <div class="content-side col-lg-9 col-md-12 col-sm-12">
-                  <div class="shop-single">
-                      <!-- Product Detail -->
-                      <div class="product-details">
-                          <!--Basic Details-->
-                          <div class="basic-details">
-                              <div class="row clearfix">
-                                  <div class="image-column col-md-6 col-sm-12">
-                                      <figure class="image"><a routerLink="assets/images/resource/products/product-sinlge.jpg" class="lightbox-image" title="Image Caption Here"><img src="assets/images/resource/products/product-sinlge.jpg" alt=""><span class="icon fa fa-search"></span></a></figure>
-                                  </div>
-                                  <div class="info-column col-md-6 col-sm-12">
-                                      <div class="details-header">
-                                          <h4>Night Security Cam 2Z1</h4>
-                                          <div class="rating">
-                                              <span class="fa fa-star"></span>
-                                              <span class="fa fa-star"></span>
-                                              <span class="fa fa-star"></span>
-                                              <span class="fa fa-star"></span>
-                                              <span class="fa fa-star"></span>
-                                          </div>
-                                          <a class="reviews" routerLink="#">(2 Customer Reviews)</a>
-                                          <div class="item-price">$218.00</div>
-                                          <div class="text">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</div>
-                                      </div>
+    @if (showAlert) {
+    <div style="z-index: 999999;" class="alert alert-dismissible fade show center-alert"
+        [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
+        {{ alertMessage }}
+        <button type="button" class="btn-close" aria-label="Close" (click)="closePopupMsg()"></button>
+    </div>
+    }
 
-                                      <div class="other-options clearfix">
-                                          <div class="item-quantity">Quantity <input type="number" class="qty text" name="quantity" value="1" title="Qty"  inputmode="numeric" ></div>
-                                          <button type="button" class="theme-btn add-to-cart"><span class="btn-title">Add To Cart</span></button>
-                                          <ul class="product-meta">
-                                              <li>Category: <a routerLink="#">Security Cam</a></li>
-                                          </ul>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <!--Basic Details-->
+    <div class="auto-container">
+        <h1>Product Detail</h1>
+        <ul class="page-breadcrumb">
+            <li><a routerLink="/">Home</a></li>
+            <li>Product Detail</li>
+        </ul>
+    </div>
+</section>
+<!--End Page Title-->
 
-                          <!--Product Info Tabs-->
-                          <div class="product-info-tabs">
-                              <!--Product Tabs-->
-                              <div class="prod-tabs tabs-box">
+<!--Sidebar Page Container-->
+<div class="sidebar-page-container">
+    <div class="auto-container">
+        <div class="row clearfix">
+            <!--Content Side-->
+            <div class="content-side col-lg-9 col-md-12 col-sm-12">
+                <div class="shop-single">
+                    <!-- Product Detail -->
+                    <div class="product-details">
+                        <!--Basic Details-->
+                        <div class="basic-details">
+                            <div class="row clearfix">
+                                <div class="image-column col-md-6 col-sm-12">
+                                    <figure class="image"><a class="lightbox-image" title="Image Caption Here"><img
+                                                src="assets/images/resource/products/product-sinlge.jpg" alt=""></a>
+                                    </figure>
+                                </div>
+                                <div class="info-column col-md-6 col-sm-12">
+                                    <div class="details-header">
+                                        <h4>{{ product?.name }}</h4>
 
-                                  <!--Tab Btns-->
-                                  <ul class="tab-btns tab-buttons clearfix">
-                                      <li data-tab="#prod-details" class="tab-btn">Descripton</li>
-                                      <li data-tab="#prod-reviews" class="tab-btn active-btn">Reviews (2)</li>
-                                  </ul>
+                                        <a class="reviews" routerLink="#">(2 Customer Reviews)</a>
+                                        <div class="item-price">Rs. {{ product?.price }}</div>
+                                        <div class="text">{{ product?.description }}</div>
 
-                                  <!--Tabs Container-->
-                                  <div class="tabs-content">
+                                        <div class="variations-section" *ngIf="product?.productVariations?.length > 1">
+                                            <div class="variation-buttons">
+                                                <button *ngFor="let variation of product?.productVariations"
+                                                    class="variation-btn"
+                                                    [class.selected]="selectedVariation === variation"
+                                                    [disabled]="variation.stock === 0"
+                                                    (click)="selectVariation(variation)">
+                                                    {{ variation.variationName }} - Rs. {{ variation.price }}
+                                                </button>
+                                            </div>
+                                        </div>
 
-                                      <!--Tab-->
-                                      <div class="tab" id="prod-details">
-                                          <h2 class="title">Descripton</h2>
-                                          <div class="content">
-                                              <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                                          </div>
-                                      </div>
 
-                                      <!--Tab-->
-                                      <div class="tab active-tab" id="prod-reviews">
-                                          <h2 class="title">2 reviews for Night Security Cam 2Z1</h2>
-                                          <!--Reviews Container-->
-                                          <div class="comments-area">
-                                              <!--Comment Box-->
-                                              <div class="comment-box">
-                                                  <div class="comment">
-                                                      <div class="author-thumb"><img src="assets/images/resource/avatar-1.png" alt=""></div>
-                                                      <div class="comment-inner">
-                                                          <div class="comment-info clearfix">
-                                                              <strong class="name">Andrew</strong>
-                                                              <span class="date">Jan 7, 2020</span>
-                                                              <div class="rating">
-                                                                  <span class="fa fa-star"></span>
-                                                                  <span class="fa fa-star"></span>
-                                                                  <span class="fa fa-star"></span>
-                                                                  <span class="fa fa-star"></span>
-                                                                  <span class="fa fa-star light"></span>
-                                                              </div>
-                                                          </div>
-                                                          <div class="text">I bought this thinking it was a nice green colour, apparently it GREY! I’m colour blind so I don’t care but my girlfriend says grey makes me look fat</div>
-                                                      </div>
-                                                  </div>
-                                              </div>
 
-                                              <!--Comment Box-->
-                                              <div class="comment-box">
-                                                  <div class="comment">
-                                                      <div class="author-thumb"><img src="assets/images/resource/avatar-2.jpg" alt=""></div>
-                                                      <div class="comment-inner">
-                                                           <div class="comment-info clearfix">
-                                                              <strong class="name">Maria</strong>
-                                                              <span class="date">Jan 7, 2020</span>
-                                                              <div class="rating">
-                                                                  <span class="fa fa-star"></span>
-                                                                  <span class="fa fa-star"></span>
-                                                                  <span class="fa fa-star"></span>
-                                                                  <span class="fa fa-star"></span>
-                                                                  <span class="fa fa-star light"></span>
-                                                              </div>
-                                                          </div>
-                                                          <div class="text">I love grey hoodies! This is perfect with my grey Ninja shirt, when I get cold I throw this on and I can still be a Ninja.</div>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
 
-                                          <!--Comment Form-->
-                                          <div class="comment-form default-form">
-                                              <div class="sub-title">Add a review</div>
-                                              <div class="form-outer">
-                                                  <p>Your email address will not be published. Required fields are marked *</p>
-                                                  <div class="rating-box">
-                                                      <div class="field-label">Your Rating</div>
-                                                      <div class="rating">
-                                                          <a routerLink="#"><span class="fa fa-star"></span></a>
-                                                          <a routerLink="#"><span class="fa fa-star"></span></a>
-                                                          <a routerLink="#"><span class="fa fa-star"></span></a>
-                                                          <a routerLink="#"><span class="fa fa-star"></span></a>
-                                                          <a routerLink="#"><span class="fa fa-star"></span></a>
-                                                      </div>
-                                                  </div>
-                                                  <form method="post" action="blog-showcase.html">
-                                                      <div class="row clearfix">
-                                                          <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                                              <div class="field-label">Your review *</div>
-                                                              <textarea name="message" placeholder=""></textarea>
-                                                          </div>
 
-                                                          <div class="col-lg-6 col-md-12 col-sm-12 form-group">
-                                                              <div class="field-label">Name *</div>
-                                                              <input type="text" name="username" placeholder="" required="">
-                                                          </div>
 
-                                                          <div class="col-lg-6 col-md-12 col-sm-12 form-group">
-                                                              <div class="field-label">Email *</div>
-                                                              <input type="email" name="email" placeholder="" required="">
-                                                          </div>
 
-                                                          <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                                              <input type="submit" class="theme-btn btn-style-three" name="submit" value="Submit">
-                                                          </div>
-                                                      </div>
-                                                  </form>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <!--End Product Info Tabs-->
+                                    </div>
 
-                          <!-- Related Products -->
-                          <div class="related-products">
+                                    <div class="other-options clearfix">
+                                        <div class="quantity-control">
+                                            <button type="button" class="btn-qty"
+                                                (click)="changeQuantity(-1)">−</button>
+                                            <span class="qty">{{ quantity }}</span>
+                                            <button type="button" class="btn-qty" (click)="changeQuantity(1)">+</button>
+
+                                            <button type="button" class="theme-btn add-to-cart" [disabled]="!product"
+                                                (click)="addToCart()">
+                                                <span class="btn-title">Add To Cart</span>
+                                            </button>
+                                        </div>
+
+
+                                        <ul class="product-meta">
+                                            <li>Category: <a routerLink="#">{{ product?.category.name }}</a></li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--Basic Details-->
+
+                        <!--Product Info Tabs-->
+                        <div class="product-info-tabs">
+                            <!--Product Tabs-->
+                            <div class="prod-tabs tabs-box">
+
+                                <!--Tab Btns-->
+                                <ul class="tab-btns tab-buttons clearfix">
+                                    <li data-tab="#prod-details" class="tab-btn">Descripton</li>
+                                    <li data-tab="#prod-reviews" class="tab-btn active-btn">Reviews (2)</li>
+                                </ul>
+
+                                <!--Tabs Container-->
+                                <div class="tabs-content">
+
+                                    <!--Tab-->
+                                    <div class="tab" id="prod-details">
+                                        <h2 class="title">Descripton</h2>
+                                        <div class="content">
+                                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada
+                                                fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae,
+                                                ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam
+                                                egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend
+                                                leo.</p>
+                                        </div>
+                                    </div>
+
+                                    <!--Tab-->
+                                    <div class="tab active-tab" id="prod-reviews">
+                                        <h2 class="title">2 reviews for Night Security Cam 2Z1</h2>
+                                        <!--Reviews Container-->
+                                        <div class="comments-area">
+                                            <!--Comment Box-->
+                                            <div class="comment-box">
+                                                <div class="comment">
+                                                    <div class="author-thumb"><img
+                                                            src="assets/images/resource/avatar-1.png" alt=""></div>
+                                                    <div class="comment-inner">
+                                                        <div class="comment-info clearfix">
+                                                            <strong class="name">Andrew</strong>
+                                                            <span class="date">Jan 7, 2020</span>
+                                                            <div class="rating">
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star light"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="text">I bought this thinking it was a nice green
+                                                            colour, apparently it GREY! I’m colour blind so I don’t care
+                                                            but my girlfriend says grey makes me look fat</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Comment Box-->
+                                            <div class="comment-box">
+                                                <div class="comment">
+                                                    <div class="author-thumb"><img
+                                                            src="assets/images/resource/avatar-2.jpg" alt=""></div>
+                                                    <div class="comment-inner">
+                                                        <div class="comment-info clearfix">
+                                                            <strong class="name">Maria</strong>
+                                                            <span class="date">Jan 7, 2020</span>
+                                                            <div class="rating">
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star light"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="text">I love grey hoodies! This is perfect with my
+                                                            grey Ninja shirt, when I get cold I throw this on and I can
+                                                            still be a Ninja.</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--Comment Form-->
+                                        <div class="comment-form default-form">
+                                            <div class="sub-title">Add a review</div>
+                                            <div class="form-outer">
+                                                <p>Your email address will not be published. Required fields are marked
+                                                    *</p>
+                                                <div class="rating-box">
+                                                    <div class="field-label">Your Rating</div>
+                                                    <div class="rating">
+                                                        <a routerLink="#"><span class="fa fa-star"></span></a>
+                                                        <a routerLink="#"><span class="fa fa-star"></span></a>
+                                                        <a routerLink="#"><span class="fa fa-star"></span></a>
+                                                        <a routerLink="#"><span class="fa fa-star"></span></a>
+                                                        <a routerLink="#"><span class="fa fa-star"></span></a>
+                                                    </div>
+                                                </div>
+                                                <form method="post" action="blog-showcase.html">
+                                                    <div class="row clearfix">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                                            <div class="field-label">Your review *</div>
+                                                            <textarea name="message" placeholder=""></textarea>
+                                                        </div>
+
+                                                        <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                                            <div class="field-label">Name *</div>
+                                                            <input type="text" name="username" placeholder=""
+                                                                required="">
+                                                        </div>
+
+                                                        <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                                            <div class="field-label">Email *</div>
+                                                            <input type="email" name="email" placeholder="" required="">
+                                                        </div>
+
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                                            <input type="submit" class="theme-btn btn-style-three"
+                                                                name="submit" value="Submit">
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End Product Info Tabs-->
+
+                        <!-- Related Products -->
+                        <!-- <div class="related-products">
                               <div class="sec-title">
                                   <h2>Related products</h2>
                               </div>
 
                               <div class="row item-green">
-                                  <!-- Shop Item -->
                                   <div class="shop-item col-lg-4 col-md-6 col-sm-12">
                                       <div class="inner-box">
                                           <div class="image-box">
@@ -197,123 +252,38 @@
                                       </div>
                                   </div>
 
-                                  <!-- Shop Item -->
-                                  <div class="shop-item col-lg-4 col-md-6 col-sm-12">
-                                      <div class="inner-box">
-                                          <div class="image-box">
-                                              <figure class="image"><a routerLink="shop-single.html"><img src="assets/images/resource/products/9.jpg" alt=""></a></figure>
-                                              <div class="btn-box"><a routerLink="shopping-cart.html">Add to cart</a></div>
-                                              <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star light"></span></div>
-                                          </div>
-                                          <div class="lower-content">
-                                              <h4 class="name"><a routerLink="shop-single.html">Security Camera BG45</a></h4>
-                                              <div class="price"> $30.00 - $35.00</div>
-                                          </div>
-                                      </div>
-                                  </div>
-
-                                  <!-- Shop Item -->
-                                  <div class="shop-item col-lg-4 col-md-6 col-sm-12">
-                                      <div class="inner-box">
-                                          <div class="image-box">
-                                              <div class="sale-tag">sale!</div>
-                                              <figure class="image"><a routerLink="shop-single.html"><img src="assets/images/resource/products/10.jpg" alt=""></a></figure>
-                                              <div class="btn-box"><a routerLink="shopping-cart.html">Add to cart</a></div>
-                                              <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star light"></span></div>
-                                          </div>
-                                          <div class="lower-content">
-                                              <h4 class="name"><a routerLink="shop-single.html">Security Camera ZZ8</a></h4>
-                                              <div class="price"> <del>$205.00</del> - $193.00</div>
-                                          </div>
-                                      </div>
-                                  </div>
+                                
                               </div>
-                          </div><!-- End Related Products -->
-                      </div><!-- Product Detail -->
-                  </div><!-- End Shop Single -->
-              </div>
+                          </div> -->
+                    </div><!-- Product Detail -->
+                </div><!-- End Shop Single -->
+            </div>
 
-              <!--Sidebar Side-->
-              <div class="sidebar-side sticky-container col-lg-3 col-md-12 col-sm-12">
-                  <aside class="sidebar theiaStickySidebar">
-                      <div class="sticky-sidebar">
+            <!--Sidebar Side-->
+            <div class="sidebar-side sticky-container col-lg-3 col-md-12 col-sm-12">
+                <aside class="sidebar theiaStickySidebar">
+                    <div class="sticky-sidebar">
 
-                          <!-- Category  Widget -->
-                          <div class="sidebar-widget category-widget">
-                              <div class="widget-content">
-                                  <h3 class="widget-title">Categories</h3>
-                                  <ul class="categories-list">
-                                      <li><a routerLink="#">Uncategorized     <span>(3)</span></a></li>
-                                      <li><a routerLink="#">Security Cam      <span>(2)</span></a></li>
-                                      <li><a routerLink="#">Heating   <span>(1)</span></a></li>
-                                      <li><a routerLink="#">Lightning <span>(2)</span></a></li>
-                                      <li><a routerLink="#">Other     <span>(3)</span></a></li>
-                                  </ul>
-                              </div>
-                          </div>
+                        <!-- Category  Widget -->
+                        <div class="sidebar-widget category-widget">
+                            <div class="widget-content">
+                                <h3 class="widget-title">Categories</h3>
+                                <ul class="categories-list">
+                                    <li *ngFor="let category of categories">
+                                        <a [routerLink]="'/shop/'">
+                                            {{ category.name }}  ({{ category.totalProducts }})
+                                        </a>
+                                    </li>
 
-                          <!-- Cart Widget -->
-                          <div class="sidebar-widget cart-widget">
-                              <div class="widget-content">
-                                  <h3 class="widget-title">Price Filter</h3>
-                                  <div class="shopping-cart">
-                                      <ul class="shopping-cart-items">
-                                          <li class="cart-item">
-                                              <img src="assets/images/resource/item-thumb-1.jpg" alt="#" class="thumb" />
-                                              <span class="item-name">Night Security Cam 2Z1</span>
-                                              <span class="item-quantity">1 x <span class="item-amount">$84.00</span></span>
-                                              <a routerLink="shop-single.html" class="product-detail"></a>
-                                              <button class="remove-item"><span class="fa fa-times"></span></button>
-                                          </li>
+                                </ul>
+                            </div>
+                        </div>
 
-                                          <li class="cart-item">
-                                              <img src="assets/images/resource/item-thumb-2.jpg" alt="#" class="thumb"  />
-                                              <span class="item-name">Day Security Camera B2Z1</span>
-                                              <span class="item-quantity">1 x <span class="item-amount">$13.00</span></span>
-                                              <a routerLink="shop-single.html" class="product-detail"></a>
-                                              <button class="remove-item"><span class="fa fa-times"></span></button>
-                                          </li>
-                                      </ul>
 
-                                      <div class="cart-footer">
-                                          <div class="shopping-cart-total"><strong>Subtotal:</strong> $97.00</div>
-                                          <a routerLink="cart.html" class="theme-btn">View Cart</a>
-                                          <a routerLink="checkout.html" class="theme-btn">Checkout</a>
-                                      </div>
-                                  </div> <!--end shopping-cart -->
-                              </div>
-                          </div>
-
-                          <!-- Post Widget -->
-                          <div class="sidebar-widget related-posts">
-                              <div class="widget-content">
-                                  <h3 class="widget-title">Most Popular</h3>
-                                  <div class="post">
-                                      <figure class="post-thumb"><a routerLink="shop-single.html"><img src="assets/images/resource/item-thumb-4.jpg" alt=""></a></figure>
-                                      <h4><a routerLink="shop-single.html">Premium Security Cam VVZ</a></h4>
-                                      <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span></div>
-                                      <div class="price">$412.00</div>
-                                  </div>
-
-                                  <div class="post">
-                                      <figure class="post-thumb"><a routerLink="shop-single.html"><img src="assets/images/resource/item-thumb-3.jpg" alt=""></a></figure>
-                                      <h4><a routerLink="shop-single.html">Premium Security Cam VVZ</a></h4>
-                                      <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span></div>
-                                      <div class="price">$412.00</div>
-                                  </div>
-
-                                  <div class="post">
-                                      <figure class="post-thumb"><a routerLink="shop-single.html"><img src="assets/images/resource/item-thumb-2.jpg" alt=""></a></figure>
-                                      <h4><a routerLink="shop-single.html">Premium Security Cam VVZ</a></h4>
-                                      <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span></div>
-                                      <div class="price">$412.00</div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </aside>
-              </div>
-          </div>
-      </div>
-  </div>
-  <!--End Sidebar Page Container-->
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Sidebar Page Container-->
