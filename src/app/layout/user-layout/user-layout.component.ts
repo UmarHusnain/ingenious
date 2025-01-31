@@ -57,6 +57,7 @@ export class UserLayoutComponent implements OnDestroy {
       'assets/css/style.css',
       'assets/css/responsive.css',
       'assets/css/odometer.css',
+      'assets/css/bootstrap.css',
     ];
 
     styles.forEach((styleUrl) => {
@@ -82,10 +83,12 @@ export class UserLayoutComponent implements OnDestroy {
     this.loadScript('assets/js/jquery.js', () => {
       this.loadScript('assets/js/popper.min.js', () => {
         this.loadScript('assets/js/bootstrap.min.js', () => {
+          this.loadScript('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js', () => {
           this.loadScript('assets/plugins/revolution/js/jquery.themepunch.revolution.min.js', () => {
             this.loadScript('assets/plugins/revolution/js/jquery.themepunch.tools.min.js', () => {
               this.loadRemainingScripts(); 
             });
+          });
           });
         });
       });

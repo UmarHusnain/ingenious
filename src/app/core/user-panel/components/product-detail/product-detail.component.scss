@@ -1,0 +1,59 @@
+.variation-buttons {
+  display: flex;
+  flex-wrap: wrap; /* Allows items to wrap to a new row */
+  gap: 10px; /* Adds space between buttons */
+  justify-content: space-between; /* Spreads buttons evenly */
+}
+
+.variation-btn {
+  flex: 1 1 calc(50% - 10px); /* Makes each button take 50% width with spacing */
+  padding: 12px;
+  font-size: 14px;
+  text-align: center;
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.variation-btn.selected {
+  background-color: #59ab66 !important;
+  color: white !important;
+  border-color: #59ab66 !important;
+}
+
+.variation-btn:disabled {
+  cursor: not-allowed;
+  background-color: #ddd;
+}
+.center-alert {
+  position: fixed;
+  top: 20px; /* Adjust spacing from the top */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1050; /* Ensure it appears above other elements */
+  width: 80%; /* Adjust width as needed */
+  max-width: 600px; /* Optional: limit max width */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+.quantity-control {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.btn-qty {
+  width: 30px;
+  height: 30px;
+  background: #ddd;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.qty {
+  min-width: 20px;
+  text-align: center;
+  font-size: 16px;
+}

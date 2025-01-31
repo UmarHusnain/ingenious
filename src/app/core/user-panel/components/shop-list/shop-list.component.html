@@ -7,16 +7,27 @@
           </div>
       </div>
 
-      <div class="auto-container">
-          <h1>Shop Items</h1>
-          <ul class="page-breadcrumb">
-              <li><a routerLink="/">Home</a></li>
-              <li>Shop Items</li>
-          </ul>
-      </div>
+     <app-breadcrumbs></app-breadcrumbs>
+     
   </section>
   <!--End Page Title-->
+  @if (isLoading) {
+    <div class="spinner-overlay">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    }
 
+    @if (showAlert) {
+      <div class="alert alert-dismissible fade show center-alert" 
+           [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" 
+           role="alert">
+        {{ alertMessage }}
+        <button type="button" class="btn-close" aria-label="Close" (click)="closePopupMsg()"></button>
+      </div>
+    }
+    
   <!--Sidebar Page Container-->
   <div class="sidebar-page-container">
       <div class="auto-container">
@@ -25,12 +36,9 @@
               <div class="content-side col-lg-9 col-md-12 col-sm-12">
                   <div class="our-shop no-padding style-two">
                       <div class="shop-upper-box clearfix">
-                          <div class="items-label">Showing all 12 results</div>
+                          <div class="items-label">Showing all {{ products.length }} results</div>
                           <div class="orderby">
                               <select name="orderby" class="sortby-select select2-offscreen">
-                                  <option value="popularity">Sort by popularity</option>
-                                  <option value="rating" >Sort by average rating</option>
-                                  <option value="date" >Sort by newness</option>
                                   <option value="price" >Sort by price: low to high</option>
                                   <option value="price-desc" >Sort by price: high to low</option>
                               </select>
@@ -38,189 +46,34 @@
                       </div>
 
                       <div class="row clearfix">
-                          <!-- Shop Item -->
-                          <div class="shop-item col-lg-4 col-md-6 col-sm-12">
-                              <div class="inner-box">
-                                  <div class="image-box">
-                                      <figure class="image"><a routerLink="/product-detail"><img src="assets/images/resource/products/5.jpg" alt=""></a></figure>
-                                      <div class="btn-box"><a routerLink="shopping-cart.html">Add to cart</a></div>
-                                      <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star light"></span></div>
-                                  </div>
-                                  <div class="lower-content">
-                                      <h4 class="name"><a routerLink="/product-detail">Security Camera BG45</a></h4>
-                                      <div class="price"> $30.00 - $35.00</div>
-                                  </div>
+                          <div class="shop-item col-lg-4 col-md-6 col-sm-12" *ngFor="let product of products">
+                            <div class="inner-box">
+                              <div class="image-box">
+                                <figure class="image">
+                                  <a (click)="goToProductDetail(product)" >
+                                  
+                                    <img src="assets/images/resource/item-thumb-1.jpg">
+                                  </a>
+                                </figure>
+                              
+                                <div class="rating">
+                                  <span class="fa fa-heart"
+                                  [class.filled]="wishlist[product.productId]"
+                                  (click)="toggleWishlist(product)">
+                            </span>
+                            
+                                </div>
+                                
                               </div>
-                          </div>
-
-                          <!-- Shop Item -->
-                          <div class="shop-item col-lg-4 col-md-6 col-sm-12">
-                              <div class="inner-box">
-                                  <div class="image-box">
-                                      <figure class="image"><a routerLink="/product-detail"><img src="assets/images/resource/products/6.jpg" alt=""></a></figure>
-                                      <div class="btn-box"><a routerLink="shopping-cart.html">Add to cart</a></div>
-                                      <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star light"></span></div>
-                                  </div>
-                                  <div class="lower-content">
-                                      <h4 class="name"><a routerLink="/product-detail">Security Camera ZZ8</a></h4>
-                                      <div class="price"> <del>$205.00</del> - $193.00</div>
-                                  </div>
+                              <div class="lower-content">
+                                <h4 class="name">
+                                  <a (click)="goToProductDetail(product)">{{ product.name }}</a>
+                                </h4>
+                                <div class="price">Rs. {{ product.price }}</div>
                               </div>
+                            </div>
                           </div>
-
-                          <!-- Shop Item -->
-                          <div class="shop-item col-lg-4 col-md-6 col-sm-12">
-                              <div class="inner-box">
-                                  <div class="image-box">
-                                      <figure class="image"><a routerLink="/product-detail"><img src="assets/images/resource/products/7.jpg" alt=""></a></figure>
-                                      <div class="btn-box"><a routerLink="shopping-cart.html">Add to cart</a></div>
-                                      <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star light"></span></div>
-                                  </div>
-                                  <div class="lower-content">
-                                      <h4 class="name"><a routerLink="/product-detail">Day Security Camera B2Z1</a></h4>
-                                      <div class="price"> $204.00</div>
-                                  </div>
-                              </div>
-                          </div>
-
-                          <!-- Shop Item -->
-                          <div class="shop-item col-lg-4 col-md-6 col-sm-12">
-                              <div class="inner-box">
-                                  <div class="image-box">
-                                      <div class="sale-tag">sale!</div>
-                                      <figure class="image"><a routerLink="/product-detail"><img src="assets/images/resource/products/8.jpg" alt=""></a></figure>
-                                      <div class="btn-box"><a routerLink="shopping-cart.html">Add to cart</a></div>
-                                      <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star light"></span></div>
-                                  </div>
-                                  <div class="lower-content">
-                                      <h4 class="name"><a routerLink="/product-detail">Premium Security Cam VVZ</a></h4>
-                                      <div class="price"> $412.00</div>
-                                  </div>
-                              </div>
-                          </div>
-
-                          <!-- Shop Item -->
-                          <div class="shop-item col-lg-4 col-md-6 col-sm-12">
-                              <div class="inner-box">
-                                  <div class="image-box">
-                                      <figure class="image"><a routerLink="/product-detail"><img src="assets/images/resource/products/9.jpg" alt=""></a></figure>
-                                      <div class="btn-box"><a routerLink="shopping-cart.html">Add to cart</a></div>
-                                      <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star light"></span></div>
-                                  </div>
-                                  <div class="lower-content">
-                                      <h4 class="name"><a routerLink="/product-detail">Security Camera BG45</a></h4>
-                                      <div class="price"> $30.00 - $35.00</div>
-                                  </div>
-                              </div>
-                          </div>
-
-                          <!-- Shop Item -->
-                          <div class="shop-item col-lg-4 col-md-6 col-sm-12">
-                              <div class="inner-box">
-                                  <div class="image-box">
-                                      <div class="sale-tag">sale!</div>
-                                      <figure class="image"><a routerLink="/product-detail"><img src="assets/images/resource/products/10.jpg" alt=""></a></figure>
-                                      <div class="btn-box"><a routerLink="shopping-cart.html">Add to cart</a></div>
-                                      <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star light"></span></div>
-                                  </div>
-                                  <div class="lower-content">
-                                      <h4 class="name"><a routerLink="/product-detail">Security Camera ZZ8</a></h4>
-                                      <div class="price"> <del>$205.00</del> - $193.00</div>
-                                  </div>
-                              </div>
-                          </div>
-
-                          <!-- Shop Item -->
-                          <div class="shop-item col-lg-4 col-md-6 col-sm-12">
-                              <div class="inner-box">
-                                  <div class="image-box">
-                                      <figure class="image"><a routerLink="/product-detail"><img src="assets/images/resource/products/11.jpg" alt=""></a></figure>
-                                      <div class="btn-box"><a routerLink="shopping-cart.html">Add to cart</a></div>
-                                      <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star light"></span></div>
-                                  </div>
-                                  <div class="lower-content">
-                                      <h4 class="name"><a routerLink="/product-detail">Day Security Camera B2Z1</a></h4>
-                                      <div class="price"> $204.00</div>
-                                  </div>
-                              </div>
-                          </div>
-
-                          <!-- Shop Item -->
-                          <div class="shop-item col-lg-4 col-md-6 col-sm-12">
-                              <div class="inner-box">
-                                  <div class="image-box">
-                                      <div class="sale-tag">sale!</div>
-                                      <figure class="image"><a routerLink="/product-detail"><img src="assets/images/resource/products/12.jpg" alt=""></a></figure>
-                                      <div class="btn-box"><a routerLink="shopping-cart.html">Add to cart</a></div>
-                                      <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star light"></span></div>
-                                  </div>
-                                  <div class="lower-content">
-                                      <h4 class="name"><a routerLink="/product-detail">Premium Security Cam VVZ</a></h4>
-                                      <div class="price"> $412.00</div>
-                                  </div>
-                              </div>
-                          </div>
-
-                          <!-- Shop Item -->
-                          <div class="shop-item col-lg-4 col-md-6 col-sm-12">
-                              <div class="inner-box">
-                                  <div class="image-box">
-                                      <figure class="image"><a routerLink="/product-detail"><img src="assets/images/resource/products/5.jpg" alt=""></a></figure>
-                                      <div class="btn-box"><a routerLink="shopping-cart.html">Add to cart</a></div>
-                                      <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star light"></span></div>
-                                  </div>
-                                  <div class="lower-content">
-                                      <h4 class="name"><a routerLink="/product-detail">Security Camera BG45</a></h4>
-                                      <div class="price"> $30.00 - $35.00</div>
-                                  </div>
-                              </div>
-                          </div>
-
-                          <!-- Shop Item -->
-                          <div class="shop-item col-lg-4 col-md-6 col-sm-12">
-                              <div class="inner-box">
-                                  <div class="image-box">
-                                      <div class="sale-tag">sale!</div>
-                                      <figure class="image"><a routerLink="/product-detail"><img src="assets/images/resource/products/6.jpg" alt=""></a></figure>
-                                      <div class="btn-box"><a routerLink="shopping-cart.html">Add to cart</a></div>
-                                      <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star light"></span></div>
-                                  </div>
-                                  <div class="lower-content">
-                                      <h4 class="name"><a routerLink="/product-detail">Security Camera ZZ8</a></h4>
-                                      <div class="price"> <del>$205.00</del> - $193.00</div>
-                                  </div>
-                              </div>
-                          </div>
-
-                          <!-- Shop Item -->
-                          <div class="shop-item col-lg-4 col-md-6 col-sm-12">
-                              <div class="inner-box">
-                                  <div class="image-box">
-                                      <figure class="image"><a routerLink="/product-detail"><img src="assets/images/resource/products/7.jpg" alt=""></a></figure>
-                                      <div class="btn-box"><a routerLink="shopping-cart.html">Add to cart</a></div>
-                                      <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star light"></span></div>
-                                  </div>
-                                  <div class="lower-content">
-                                      <h4 class="name"><a routerLink="/product-detail">Day Security Camera B2Z1</a></h4>
-                                      <div class="price"> $204.00</div>
-                                  </div>
-                              </div>
-                          </div>
-
-                          <!-- Shop Item -->
-                          <div class="shop-item col-lg-4 col-md-6 col-sm-12">
-                              <div class="inner-box">
-                                  <div class="image-box">
-                                      <figure class="image"><a routerLink="/product-detail"><img src="assets/images/resource/products/8.jpg" alt=""></a></figure>
-                                      <div class="btn-box"><a routerLink="shopping-cart.html">Add to cart</a></div>
-                                      <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star light"></span></div>
-                                  </div>
-                                  <div class="lower-content">
-                                      <h4 class="name"><a routerLink="/product-detail">Premium Security Cam VVZ</a></h4>
-                                      <div class="price"> $412.00</div>
-                                  </div>
-                              </div>
-                          </div>
+                        
                       </div>
                   </div>
               </div>
@@ -235,93 +88,18 @@
                               <div class="widget-content">
                                   <h3 class="widget-title">Categories</h3>
                                   <ul class="categories-list">
-                                      <li><a routerLink="#">Uncategorized     <span>(3)</span></a></li>
-                                      <li><a routerLink="#">Security Cam      <span>(2)</span></a></li>
-                                      <li><a routerLink="#">Heating   <span>(1)</span></a></li>
-                                      <li><a routerLink="#">Lightning <span>(2)</span></a></li>
-                                      <li><a routerLink="#">Other     <span>(3)</span></a></li>
+                                      <li *ngFor="let category of categories">
+                                        <a [routerLink]="'/shop/'">
+                                          {{ category.name }}  ({{ category.totalProducts }})
+                                        </a>
+                                      </li>
+                                   
                                   </ul>
                               </div>
                           </div>
 
-                          <!-- Range Slider Widget -->
-                          <div class="sidebar-widget rangeslider-widget">
-                              <div class="widget-content">
-                                  <h3 class="widget-title">Price Filter</h3>
 
-                                  <div class="range-slider-one clearfix">
-                                      <div class="price-range-slider"></div>
-                                      <div class="clearfix">
-                                          <div class="pull-left input-box">
-                                              <div class="title">Price:</div>
-                                              <div class="input"><input type="text" class="property-amount" name="field-name" readonly></div>
-                                          </div>
-                                          <div class="pull-right btn-box">
-                                              <a routerLink="#" class="theme-btn">Filter</a>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-
-                          <!-- Cart Widget -->
-                          <div class="sidebar-widget cart-widget">
-                              <div class="widget-content">
-                                  <h3 class="widget-title">Price Filter</h3>
-                                  <div class="shopping-cart">
-                                      <ul class="shopping-cart-items">
-                                          <li class="cart-item">
-                                              <img src="assets/images/resource/item-thumb-1.jpg" alt="#" class="thumb" />
-                                              <span class="item-name">Night Security Cam 2Z1</span>
-                                              <span class="item-quantity">1 x <span class="item-amount">$84.00</span></span>
-                                              <a routerLink="/product-detail" class="product-detail"></a>
-                                              <button class="remove-item"><span class="fa fa-times"></span></button>
-                                          </li>
-
-                                          <li class="cart-item">
-                                              <img src="assets/images/resource/item-thumb-2.jpg" alt="#" class="thumb"  />
-                                              <span class="item-name">Day Security Camera B2Z1</span>
-                                              <span class="item-quantity">1 x <span class="item-amount">$13.00</span></span>
-                                              <a routerLink="/product-detail" class="product-detail"></a>
-                                              <button class="remove-item"><span class="fa fa-times"></span></button>
-                                          </li>
-                                      </ul>
-
-                                      <div class="cart-footer">
-                                          <div class="shopping-cart-total"><strong>Subtotal:</strong> $97.00</div>
-                                          <a routerLink="cart.html" class="theme-btn">View Cart</a>
-                                          <a routerLink="checkout.html" class="theme-btn">Checkout</a>
-                                      </div>
-                                  </div> <!--end shopping-cart -->
-                              </div>
-                          </div>
-
-                          <!-- Post Widget -->
-                          <div class="sidebar-widget related-posts">
-                              <div class="widget-content">
-                                  <h3 class="widget-title">Most Popular</h3>
-                                  <div class="post">
-                                      <figure class="post-thumb"><a routerLink="/product-detail"><img src="assets/images/resource/item-thumb-4.jpg" alt=""></a></figure>
-                                      <h4><a routerLink="/product-detail">Premium Security Cam VVZ</a></h4>
-                                      <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span></div>
-                                      <div class="price">$412.00</div>
-                                  </div>
-
-                                  <div class="post">
-                                      <figure class="post-thumb"><a routerLink="/product-detail"><img src="assets/images/resource/item-thumb-3.jpg" alt=""></a></figure>
-                                      <h4><a routerLink="/product-detail">Premium Security Cam VVZ</a></h4>
-                                      <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span></div>
-                                      <div class="price">$412.00</div>
-                                  </div>
-
-                                  <div class="post">
-                                      <figure class="post-thumb"><a routerLink="/product-detail"><img src="assets/images/resource/item-thumb-2.jpg" alt=""></a></figure>
-                                      <h4><a routerLink="/product-detail">Premium Security Cam VVZ</a></h4>
-                                      <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span></div>
-                                      <div class="price">$412.00</div>
-                                  </div>
-                              </div>
-                          </div>
+                         
                       </div>
                   </aside>
               </div>
