@@ -143,8 +143,8 @@ export class CartComponent implements OnInit {
 
 
   proceedToCheckout(): void {
-    this.sharedService.setCartItems(this.cartItems); // Set the cart data in the shared service
-    this.router.navigate(['/pharmacy/checkout']);
+    this.sharedService.setCartItems(this.cartItems); // Set cart data in the SharedService
+    this.router.navigate(['/checkout']);            // Redirect to the checkout page
   }
 
 
