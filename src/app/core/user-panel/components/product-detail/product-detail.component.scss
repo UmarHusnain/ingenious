@@ -57,3 +57,75 @@
   text-align: center;
   font-size: 16px;
 }
+
+// .rating {
+//   display: flex;
+//   gap: 10px;
+// }
+
+// .rating-label {
+//   display: flex;
+//   align-items: center;
+//   cursor: pointer;
+//   position: relative;
+// }
+
+// .rating input {
+//   display: none; /* Hide default checkbox */
+// }
+
+// .custom-checkbox {
+//   width: 20px;
+//   height: 20px;
+//   border: 2px solid #ccc;
+//   background-color: white;
+//   border-radius: 4px;
+//   display: inline-block;
+//   transition: background 0.3s ease;
+// }
+
+// .rating input:checked + .custom-checkbox {
+//   background-color: #FFD700; /* Gold when checked */
+//   border-color: #FFD700;
+// }
+
+// .rating-label:hover .custom-checkbox {
+//   background-color: #FFA500; /* Orange on hover */
+// }
+
+
+
+.rating {
+  font-size: 40px;
+  display: flex;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.fa {
+  transition: color 0.3s ease-in-out;
+}
+.fa {
+  font-size: 24px;
+  cursor: pointer;
+  color: #ffd700; /* Gold color for stars */
+}
+
+.fa-star-o {
+  color: #ccc; /* Gray color for empty stars */
+}
+/* Default empty stars */
+.fa-star-o {
+  color: #ccc; /* Light Gray */
+}
+
+/* Filled stars (selected or hovered) */
+.fa-star {
+  color: #FFD700; /* Gold */
+}
+
+/* Hover effect (temporarily fill stars) */
+.rating span:hover,
+.rating span:hover ~ span {
+  color: #FFA500 !important; /* Orange hover effect */
+}

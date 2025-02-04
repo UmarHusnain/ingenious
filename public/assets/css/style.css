@@ -11977,6 +11977,7 @@ clip-path: polygon(0% 120px, 50% 60px, 100% 0%, 100% 100%, 50% calc(100% - 60px)
 	position: relative;
 	display: flex;
 	margin-bottom: 10px;
+	align-items: center;
 }
 
 .prod-tabs .comment-form .rating-box .rating{

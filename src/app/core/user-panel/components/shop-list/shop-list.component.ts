@@ -18,6 +18,10 @@ import { WishListService } from "../../../services/wish-list.service";
 export class ShopListComponent implements OnInit {
   categories: ICategory[] = [];
   products: IGetProduct[] = [];
+
+  filteredProducts: IGetProduct[] = [];
+  selectedCategoryId: number | null = null;
+
   isLoading: boolean = false;
   aspNetUserId: string = "9653ee76-abb5-40c7-9ebd-b16ba4af6662";
   wishlist: { [key: number]: number } = {};
@@ -60,6 +64,7 @@ export class ShopListComponent implements OnInit {
     this.productService.getAllProducts().subscribe({
       next: (response) => {
         this.products = response.data;
+        this.filteredProducts = [...this.products];
         this.isLoading = false;
       },
       error: (error) => {
@@ -68,6 +73,18 @@ export class ShopListComponent implements OnInit {
       },
     });
   }
+
+  sortProducts(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const order = selectElement.value; // Get selected value properly
+  
+    if (order === 'price') {
+      this.products.sort((a, b) => a.price - b.price); // Low to High
+    } else if (order === 'price-desc') {
+      this.products.sort((a, b) => b.price - a.price); // High to Low
+    }
+  }
+  
 
   loadWishlist(): void {
     this.wishlistService.getWishlistByUserId(this.aspNetUserId).subscribe({
@@ -127,4 +144,17 @@ export class ShopListComponent implements OnInit {
   closePopupMsg() {
     this.showAlert = false;
   }
+
+   // Filter products based on the selected category
+   filterProductsByCategory(categoryId: number): void {
+    this.selectedCategoryId = categoryId;
+    this.filteredProducts = this.products.filter(product => product.categoryId === categoryId);
+  }
+
+  // Reset to show all products when no category is selected
+  resetFilters(): void {
+    this.selectedCategoryId = null;
+    this.filteredProducts = [...this.products];
+  }
+
 }
