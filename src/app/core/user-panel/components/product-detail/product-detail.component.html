@@ -109,152 +109,101 @@
 
                                 <!--Tab Btns-->
                                 <ul class="tab-btns tab-buttons clearfix">
-                                    <li data-tab="#prod-details" class="tab-btn">Descripton</li>
-                                    <li data-tab="#prod-reviews" class="tab-btn active-btn">Reviews (2)</li>
+                                    <li (click)="switchTab('prod-details')"
+                                        [class.active-btn]="activeTab === 'prod-details'" class="tab-btn">Description
+                                    </li>
+                                    <li (click)="switchTab('prod-reviews')"
+                                        [class.active-btn]="activeTab === 'prod-reviews'" class="tab-btn">Reviews
+                                        ({{ reviews.length }})</li>
                                 </ul>
 
                                 <!--Tabs Container-->
                                 <div class="tabs-content">
 
                                     <!--Tab-->
-                                    <div class="tab" id="prod-details">
-                                        <h2 class="title">Descripton</h2>
+                                    <div class="tab" id="prod-details"
+                                        [class.active-tab]="activeTab === 'prod-details'">
+                                        <h2 class="title">Description</h2>
                                         <div class="content">
-                                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada
-                                                fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae,
-                                                ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam
-                                                egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend
-                                                leo.</p>
+                                            <p>{{ product?.description }}</p>
                                         </div>
                                     </div>
 
                                     <!--Tab-->
-                                    <div class="tab active-tab" id="prod-reviews">
-                                        <h2 class="title">2 reviews for Night Security Cam 2Z1</h2>
+                                    <div class="tab active-tab" id="prod-reviews"
+                                        [class.active-tab]="activeTab === 'prod-reviews'">
+                                        <h2 class="title">Customer Reviews</h2>
                                         <!--Reviews Container-->
-                                        <div class="comments-area">
-                                            <!--Comment Box-->
-                                            <div class="comment-box">
+                                        <div class="comments-area" *ngIf="reviews.length > 0">
+                                            <div class="comment-box" *ngFor="let review of reviews">
                                                 <div class="comment">
-                                                    <div class="author-thumb"><img
-                                                            src="assets/images/resource/avatar-1.png" alt=""></div>
-                                                    <div class="comment-inner">
-                                                        <div class="comment-info clearfix">
-                                                            <strong class="name">Andrew</strong>
-                                                            <span class="date">Jan 7, 2020</span>
-                                                            <div class="rating">
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star light"></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text">I bought this thinking it was a nice green
-                                                            colour, apparently it GREY! I’m colour blind so I don’t care
-                                                            but my girlfriend says grey makes me look fat</div>
+                                                    <div class="author-thumb">
+                                                        <img src="assets/images/resource/avatar-1.png" alt="">
                                                     </div>
-                                                </div>
-                                            </div>
-
-                                            <!--Comment Box-->
-                                            <div class="comment-box">
-                                                <div class="comment">
-                                                    <div class="author-thumb"><img
-                                                            src="assets/images/resource/avatar-2.jpg" alt=""></div>
                                                     <div class="comment-inner">
                                                         <div class="comment-info clearfix">
-                                                            <strong class="name">Maria</strong>
-                                                            <span class="date">Jan 7, 2020</span>
+                                                            <strong class="name">User {{ review.aspNetUserId }}</strong>
+                                                            <span class="date">{{ review.createdAt | date: 'medium'
+                                                                }}</span>
                                                             <div class="rating">
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star"></span>
-                                                                <span class="fa fa-star light"></span>
+                                                                <span
+                                                                    *ngFor="let star of [].constructor(review.rating); let i = index"
+                                                                    class="fa fa-star"></span>
                                                             </div>
                                                         </div>
-                                                        <div class="text">I love grey hoodies! This is perfect with my
-                                                            grey Ninja shirt, when I get cold I throw this on and I can
-                                                            still be a Ninja.</div>
+                                                        <div class="text">{{ review.comment }}</div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- No Reviews Message -->
+                                        <div *ngIf="reviews.length === 0" class="no-reviews">
+                                            <p>No reviews yet. Be the first to review this product!</p>
+                                        </div>
+
 
                                         <!--Comment Form-->
                                         <div class="comment-form default-form">
-                                            <div class="sub-title">Add a review</div>
+                                            <div class="sub-title">Add a Review</div>
                                             <div class="form-outer">
                                                 <p>Your email address will not be published. Required fields are marked
                                                     *</p>
+
                                                 <div class="rating-box">
                                                     <div class="field-label">Your Rating</div>
                                                     <div class="rating">
-                                                        <a routerLink="#"><span class="fa fa-star"></span></a>
-                                                        <a routerLink="#"><span class="fa fa-star"></span></a>
-                                                        <a routerLink="#"><span class="fa fa-star"></span></a>
-                                                        <a routerLink="#"><span class="fa fa-star"></span></a>
-                                                        <a routerLink="#"><span class="fa fa-star"></span></a>
+                                                        <span *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+                                                            class="fa" [ngClass]="{
+                                                                'fa-star': i < rating || i < hoverRating,
+                                                                'fa-star-o': !(i < rating || i < hoverRating)
+                                                              }" (click)="setRating(i + 1)"
+                                                            (mouseover)="setHover(i + 1)" (mouseleave)="resetHover()">
+                                                        </span>
                                                     </div>
+
                                                 </div>
-                                                <form method="post" action="blog-showcase.html">
-                                                    <div class="row clearfix">
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                                            <div class="field-label">Your review *</div>
-                                                            <textarea name="message" placeholder=""></textarea>
-                                                        </div>
 
-                                                        <div class="col-lg-6 col-md-12 col-sm-12 form-group">
-                                                            <div class="field-label">Name *</div>
-                                                            <input type="text" name="username" placeholder=""
-                                                                required="">
-                                                        </div>
 
-                                                        <div class="col-lg-6 col-md-12 col-sm-12 form-group">
-                                                            <div class="field-label">Email *</div>
-                                                            <input type="email" name="email" placeholder="" required="">
-                                                        </div>
+                                                <div class="form-group">
+                                                    <label>Your Review *</label>
+                                                    <textarea [(ngModel)]="newReview.comment"
+                                                        placeholder="Write your review here..."
+                                                        class="form-control"></textarea>
+                                                </div>
 
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                                                            <input type="submit" class="theme-btn btn-style-three"
-                                                                name="submit" value="Submit">
-                                                        </div>
-                                                    </div>
-                                                </form>
+                                                <div class="form-group">
+                                                    <button type="button" class="theme-btn btn-style-three"
+                                                        (click)="submitReview()">
+                                                        Submit Review
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!--End Product Info Tabs-->
 
-                        <!-- Related Products -->
-                        <!-- <div class="related-products">
-                              <div class="sec-title">
-                                  <h2>Related products</h2>
-                              </div>
-
-                              <div class="row item-green">
-                                  <div class="shop-item col-lg-4 col-md-6 col-sm-12">
-                                      <div class="inner-box">
-                                          <div class="image-box">
-                                              <div class="sale-tag">sale!</div>
-                                              <figure class="image"><a routerLink="shop-single.html"><img src="assets/images/resource/products/8.jpg" alt=""></a></figure>
-                                              <div class="btn-box"><a routerLink="shopping-cart.html">Add to cart</a></div>
-                                              <div class="rating"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star light"></span></div>
-                                          </div>
-                                          <div class="lower-content">
-                                              <h4 class="name"><a routerLink="shop-single.html">Premium Security Cam VVZ</a></h4>
-                                              <div class="price"> $412.00</div>
-                                          </div>
-                                      </div>
-                                  </div>
-
-                                
-                              </div>
-                          </div> -->
                     </div><!-- Product Detail -->
                 </div><!-- End Shop Single -->
             </div>
@@ -270,9 +219,8 @@
                                 <h3 class="widget-title">Categories</h3>
                                 <ul class="categories-list">
                                     <li *ngFor="let category of categories">
-                                        <a [routerLink]="'/shop/'">
-                                            {{ category.name }}  ({{ category.totalProducts }})
-                                        </a>
+                                        <a [routerLink]="'/shop/'">{{ category.name }}</a>
+                                        <span class="category-count">({{ category.totalProducts }})</span>
                                     </li>
 
                                 </ul>

@@ -58,6 +58,7 @@ export class UserLayoutComponent implements OnDestroy {
       'assets/css/responsive.css',
       'assets/css/odometer.css',
       'assets/css/bootstrap.css',
+      'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
     ];
 
     styles.forEach((styleUrl) => {

@@ -15,6 +15,7 @@ import { CheckoutComponent } from './core/user-panel/components/checkout/checkou
 import { ProductDetailComponent } from './core/user-panel/components/product-detail/product-detail.component';
 import { UserLayoutComponent } from './layout/user-layout/user-layout.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
+import { WishListComponent } from './core/user-panel/components/wish-list/wish-list.component';
 
 export const routes: Routes = [
   {
@@ -76,6 +77,10 @@ export const routes: Routes = [
       {
         path: 'shop',
         component: ShopListComponent,
+      },
+      {
+        path: 'wishlist',
+        component: WishListComponent,
       },
       {
         path: 'cart',

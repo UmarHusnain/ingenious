@@ -1,7 +1,7 @@
-/* Ingenious | Just another HTML Template
+/* Home Haven Automation | Just another HTML Template
 
-Template Name: Ingenious
-Author: Ingenious
+Template Name: Home Haven Automation
+Author: Home Haven Automation
 Version: 1.0.0
 
 
@@ -121,17 +121,17 @@ Version: 1.0.0
 
  ***/
 
-body {
-
+ body {
     font-size: 16px;
     color: #363636;
-	line-height: 28px;
-	font-weight:400;
-	background:#ffffff;
-	-webkit-font-smoothing: antialiased;
-	-moz-font-smoothing: antialiased;
-	font-family: 'Roboto', sans-serif;
+    line-height: 28px;
+    font-weight: 400;
+    background: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    font-family: 'Montserrat', sans-serif; /* Applied globally */
 }
+
 
 a{
 	text-decoration:none;
@@ -151,7 +151,7 @@ h1,h2,h3,h4,h5,h6 {
 	margin:0px;
 	background:none;
 	line-height:1.2em;
-	font-family: 'Catamaran', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 }
 
 section{
@@ -2321,7 +2321,9 @@ hr{
 ***/
 
 .main-header{
-	position: absolute;
+	position: fixed;
+	/* position: absolute; */
+	background-color: #ffffff;
 	left: 0;
 	top: 0;
 	width: 100%;
@@ -2334,7 +2336,7 @@ hr{
 	display: block;
 	width: calc(100% - 80px);
     margin: 0 40px;
-	min-height: 100px;
+	/* min-height: 100px; */
 }
 
 .main-header .nav-outer{
@@ -2347,7 +2349,7 @@ hr{
 .main-header .logo{
 	position: relative;
 	z-index: 9;
-	padding: 22px 20px;
+	padding: 0px 0px;
 	max-width: 184px;
 }
 
@@ -2377,8 +2379,8 @@ hr{
 .main-menu .navigation > li{
 	position:relative;
 	display: inline-block;
-	padding: 20px 0;
-	font-family: 'Catamaran';
+	padding: 0px 0;
+	font-family: 'Montserrat';
 	-webkit-transition:all 300ms ease;
 	-moz-transition:all 300ms ease;
 	-ms-transition:all 300ms ease;
@@ -2394,7 +2396,8 @@ hr{
     font-size: 15px;
     line-height: 36px;
 	font-weight:600;
-	color:#ffffff;
+	color: #000;
+	/* color:#ffffff; */
 	padding: 0 19px;
 	text-transform: uppercase;
 	-webkit-transition:all 300ms ease;
@@ -2415,7 +2418,8 @@ hr{
     line-height: 20px;
     font-size: 12px;
     font-weight: 900;
-    color: #ffffff;
+	color: #000;
+    /* color: #ffffff; */
     z-index: 5;
 }
 
@@ -2444,7 +2448,9 @@ hr{
 }
 
 .main-menu .navigation > li > a > span:after{
-	background-color: #ffffff;
+	/* background-color: #ffffff; */
+	background-color: #000;
+
 }
 
 .main-menu .navigation > li:hover > a > span:before,
@@ -5489,7 +5495,7 @@ clip-path: polygon(0% 120px, 50% 60px, 100% 0%, 100% 100%, 50% calc(100% - 60px)
 	color: #363636;
 	font-weight: 600;
 	line-height: 1em;
-	font-family: "Catamaran";
+	font-family: "Montserrat";
 }
 
 .step-btn .step-background{
@@ -5896,7 +5902,7 @@ clip-path: polygon(0% 120px, 50% 60px, 100% 0%, 100% 100%, 50% calc(100% - 60px)
 	color: #363636;
     direction: ltr;
     font-weight: 600;
-	font-family: Catamaran;
+	font-family: Montserrat;
 }
 
 .fun-fact-section .counter-column .count-text:before{
@@ -6007,7 +6013,7 @@ clip-path: polygon(0% 120px, 50% 60px, 100% 0%, 100% 100%, 50% calc(100% - 60px)
     color: #ffffff;
     line-height: 1.2em;
     font-weight: 600;
-    font-family: Catamaran;
+    font-family: Montserrat;
 }
 
 .counter-column-two .count-title{
@@ -11971,6 +11977,7 @@ clip-path: polygon(0% 120px, 50% 60px, 100% 0%, 100% 100%, 50% calc(100% - 60px)
 	position: relative;
 	display: flex;
 	margin-bottom: 10px;
+	align-items: center;
 }
 
 .prod-tabs .comment-form .rating-box .rating{

@@ -5,13 +5,22 @@ import { CartService } from '../../../core/services/cart.service';
 import { addCart, cartSignal } from '../../../../../store/cartStore';
 import { NgbModule, NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { SharedService } from '../../services/shared.service';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [RouterModule,CommonModule],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrl: './header.component.scss',
+  animations: [
+    trigger('fade', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('0.5s', style({ opacity: 1 })),
+      ])
+    ])
+  ]
 })
 export class HeaderComponent {
   isSticky = false;
