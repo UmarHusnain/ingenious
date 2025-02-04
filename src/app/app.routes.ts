@@ -20,6 +20,8 @@ import { UserComponent } from './core/Admin-panel/Components/user/user.component
 import { SigninComponent } from './core/auth/components/signin/signin.component';
 import { SignupComponent } from './core/auth/components/signup/signup.component';
 import { CategoriesComponent } from './core/Admin-panel/Components/categories/categories.component';
+import { AddCategoryComponent } from './core/Admin-panel/Components/categories/add-category/add-category.component';
+import { ProductsComponent } from './core/Admin-panel/Components/products/products.component';
 export const routes: Routes = [
   {
     path: 'admin',
@@ -40,6 +42,13 @@ export const routes: Routes = [
       {
         path: 'categories',
         component: CategoriesComponent,
+      },
+      {path:'add-category',
+        component:AddCategoryComponent
+      },
+      {
+        path: 'products',
+        component: ProductsComponent,
       },
     ]
   },

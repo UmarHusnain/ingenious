@@ -1,0 +1,81 @@
+@if (isLoading) {
+    <div class="spinner-overlay">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    }
+    
+    @if (showAlert) {
+    <div style="z-index: 999999;" class="alert alert-dismissible fade show center-alert"
+        [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
+        {{ alertMessage }}
+        <button type="button" class="btn-close" aria-label="Close" (click)="closePopupMsg()"></button>
+    </div>
+    }
+  <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- <div class="row"> -->
+          <div class="col-10"></div>
+          <div class="col-2 mb-2 mt-2">
+              <button class="btn-lg btn-primary" (click)="navigateToAddProduct()">Add Products</button>
+          <!-- </div> -->
+      </div>
+          <div class="col-12">
+              <div class="card">
+                  <div class="card-header">
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                      <thead>
+                      <tr>
+                        <th>Sr#</th>
+                        <th>Name</th>
+                        <th>Price(Rs)</th>
+                        <th>Stock</th>
+                        <th>Discount(%)</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let product of products; let i = index">
+                          <td>{{ i + 1 }}</td>
+                          <td>{{ product.name }}</td>
+                          <td>{{ product.price }}</td>
+                          <td>{{product.stock}}</td>
+                          <td>{{product.discount}}</td>
+                          <td>
+                            <div class="form-check form-switch d-flex">
+                              <input type="checkbox" id="flexSwitchCheckDefault"
+                              class="form-check-input" [(ngModel)]="product.isActive" (change)="toggleStatus(product)">
+                              <!-- <span class="slider round"></span> -->
+                            </div>
+                          </td>
+                          <td>
+                            <div class="actions">
+                              <a class="btn btn-sm bg-default-light mx-2" (click)="openViewProductModal(product)">
+                                <i class="fa-solid fa-eye"></i>
+                              </a>
+                              <a class="btn btn-sm bg-success-light" (click)="openEditProductModal(product)">
+                                <i class="fas fa-pencil-alt"></i>
+                              </a>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+            <!-- /.card -->
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>

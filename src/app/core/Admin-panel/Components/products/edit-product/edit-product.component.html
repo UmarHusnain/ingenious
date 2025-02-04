@@ -1,0 +1,93 @@
+<div id="edit_Product">
+    <div class="modal-header">
+        <h2 class="modalTitle">Edit Product</h2>
+        <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close">x</button>
+    </div>
+
+    <div class="modal-body">
+        <form (ngSubmit)="submitForm()">
+            <!-- Product Fields -->
+            <div class="form-group">
+                <label>Product Name *</label>
+                <input type="text" [(ngModel)]="product.name" name="name" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>Stock *</label>
+                <input type="number" [(ngModel)]="product.stock" name="stock" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>Price *</label>
+                <input type="number" [(ngModel)]="product.price" name="price" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>Discount (%)</label>
+                <input type="number" [(ngModel)]="product.discount" name="discount" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <textarea [(ngModel)]="product.description" name="description" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Category *</label>
+                <select name="categoryId" [(ngModel)]="product.categoryId" class="form-control" placeholder="Select category">
+                  <option value="" disabled selected>Select Category</option>
+                  <option *ngFor="let category of categories" [value]="category.categoryId">{{ category.name }}</option>
+                </select>
+              </div>
+            <div class="form-group">
+                <label for="productImages">Upload Product Images</label>
+
+                <!-- File Input -->
+                <input type="file" id="productImages" (change)="onImageSelect($event)" multiple accept="image/*"
+                    class="form-control d-none">
+
+                <!-- Styled Upload Area -->
+                <div class="upload-area" (click)="triggerFileInput()">
+                    <p>Click to upload or drag and drop</p>
+                </div>
+                <!-- Image Upload Preview -->
+                <div class="image-preview-container">
+                    <div *ngFor="let image of product?.productImages; let i = index" class="image-preview">
+                        <img [src]="image.imageUrl" alt="Preview" class="preview-img">
+                        <div class="default-checkbox">
+                            <input type="checkbox" [checked]="image.isDefault" (change)="setDefaultImage(i)">
+                            <label class="checkbox-label">Default</label>
+                          </div>
+                        <button type="button" class="btn btn-danger btn-sm" (click)="removeImage(i)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Product Variations</h3>
+            <div *ngIf="product?.productVariations">
+                <div *ngFor="let variation of product?.productVariations; let i = index" class="variation-row">
+                    <input type="text" [(ngModel)]="variation.variationName" name="variationName" placeholder="Variation Name"
+                        class="form-control">
+                    <input type="number" [(ngModel)]="variation.price" name="Vprice" placeholder="Price" class="form-control">
+                    <input type="number" [(ngModel)]="variation.stock" name="Vstock" placeholder="Stock" class="form-control">
+                    <button type="button" (click)="removeVariation(i)" class="btn-delete">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Add New Variation Button -->
+            <button type="button" (click)="addVariation()" >
+                <i class="fas fa-plus"></i> 
+            </button>
+            <!-- Submit Button -->
+       
+        </form>
+        <div class="submit-container">
+            <button type="submit" class="btn btn-primary" (click)="submitForm()">
+              Save Changes
+            </button>
+          </div>
+    </div>
+</div>
