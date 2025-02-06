@@ -91,8 +91,8 @@ Version: 1.0.0
 @import url('fontawesome-all.css');
 @import url('animate.css');
 @import url('owl.css');
-@import url('jquery-ui.min.css');
-@import url('jquery.modal.min.css');
+/* @import url('jquery-ui.min.css');
+@import url('jquery.modal.min.css'); */
 @import url('select2.min.css');
 @import url('odometer.css');
 @import url('jquery.fancybox.min.css');
@@ -134,7 +134,7 @@ Version: 1.0.0
 
 
 a{
-	text-decoration:none;
+	text-decoration:none !important;
 	cursor:pointer;
 }
 
@@ -2399,7 +2399,7 @@ hr{
 	color: #000;
 	/* color:#ffffff; */
 	padding: 0 19px;
-	text-transform: uppercase;
+	text-transform: capitalize;
 	-webkit-transition:all 300ms ease;
 	-moz-transition:all 300ms ease;
 	-ms-transition:all 300ms ease;

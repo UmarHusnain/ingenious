@@ -65,6 +65,18 @@ export class WishListComponent implements OnInit {
     });
   }
 
+  sortWishlist(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const order = selectElement.value;
+  
+    if (order === 'price') {
+      this.wishListProduct.sort((a, b) => a.product.price - b.product.price); // Low to High
+    } else if (order === 'price-desc') {
+      this.wishListProduct.sort((a, b) => b.product.price - a.product.price); // High to Low
+    }
+  }
+
+  
   // goToProductDetail(wishlistId: IGetProduct): void {
   //   this.router.navigate(['/product-detail'], { state: { product } });
   // }

@@ -79,9 +79,9 @@ export class ShopListComponent implements OnInit {
     const order = selectElement.value; // Get selected value properly
   
     if (order === 'price') {
-      this.products.sort((a, b) => a.price - b.price); // Low to High
+      this.filteredProducts.sort((a, b) => a.price - b.price); // Low to High
     } else if (order === 'price-desc') {
-      this.products.sort((a, b) => b.price - a.price); // High to Low
+      this.filteredProducts.sort((a, b) => b.price - a.price); // High to Low
     }
   }
   

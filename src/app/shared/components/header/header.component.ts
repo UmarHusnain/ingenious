@@ -87,6 +87,7 @@ export class HeaderComponent {
     );
   }
 
+
   updateCartItem(item: any, quantity: number) {
     if (quantity < 1) return; 
     item.quantity = quantity; 
@@ -151,4 +152,18 @@ export class HeaderComponent {
     this.sharedService.setCartItems(this.cartItems); // Set the cart data in the shared service
     this.router.navigate(['/checkout']);
   }
+
+     // Check if the current route matches the given path
+     isActive(route: string): boolean {
+      const currentUrl = this.router.url;
+      
+      // Ensure home is only active when exactly on "/"
+      if (route === '/' && currentUrl !== '/') {
+        return false;
+      }
+    
+      // Check if the current URL starts with the route
+      return currentUrl === route || currentUrl.startsWith(route + '/');
+    }
+    
 }

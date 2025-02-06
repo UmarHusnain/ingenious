@@ -19,4 +19,23 @@
     text-align: center;
     font-size: 16px;
   }
-  
+
+
+  .modal-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .close-button {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex
+;
+    align-items: center;
+    justify-content: center;
+    background-color: #aaa;
+    font-size: 1.5em;
+    cursor: pointer;
+  }

@@ -50,14 +50,16 @@ export class UserLayoutComponent implements OnDestroy {
 
   loadStyles(): void {
     const styles = [
-      'assets/css/bootstrap.css',
+      // 'assets/css/bootstrap.css',
+      'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css',
       'assets/plugins/revolution/css/settings.css',
       'assets/plugins/revolution/css/layers.css',
       'assets/plugins/revolution/css/navigation.css',
       'assets/css/style.css',
       'assets/css/responsive.css',
       'assets/css/odometer.css',
-      'assets/css/bootstrap.css',
+      // 'assets/css/bootstrap.css',
+      'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css',
       'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
     ];
 

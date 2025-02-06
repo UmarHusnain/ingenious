@@ -2,15 +2,15 @@
     font-size: 22px; /* Adjust size */
     cursor: pointer;
     transition: color 0.3s ease-in-out;
-    color: #bbb ; 
+    color: #bbb !important; 
     font-size: larger !important;
   
     &.filled {
-      color: #ff005c; /* Red: Wishlisted */
+      color: #ff005c !important; /* Red: Wishlisted */
     }
   
     &:hover {
-      color: #ff2a75; /* Slightly Brighter Red on Hover */
+      color: #ff2a75 !important; /* Slightly Brighter Red on Hover */
     }
   }
   
