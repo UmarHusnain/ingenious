@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IRegister } from '../Interfaces/IRegister';
-import { environment } from '../../../../environments/environment';
 import { LocalStorageService } from './localStorage.service';
+import { environment } from '../../../../environment/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-   private apiUrl =` ${environment.baseApiUrl}${environment.ApiUrl}Account`
+   private apiUrl =` ${environment.baseUrl}Account`
 
   constructor(private http: HttpClient, private localStorageService:LocalStorageService) {}
 
