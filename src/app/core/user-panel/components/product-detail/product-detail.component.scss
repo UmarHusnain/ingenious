@@ -1,0 +1,131 @@
+.variation-buttons {
+  display: flex;
+  flex-wrap: wrap; /* Allows items to wrap to a new row */
+  gap: 10px; /* Adds space between buttons */
+  justify-content: space-between; /* Spreads buttons evenly */
+}
+
+.variation-btn {
+  flex: 1 1 calc(50% - 10px); /* Makes each button take 50% width with spacing */
+  padding: 12px;
+  font-size: 14px;
+  text-align: center;
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.variation-btn.selected {
+  background-color: #59ab66 !important;
+  color: white !important;
+  border-color: #59ab66 !important;
+}
+
+.variation-btn:disabled {
+  cursor: not-allowed;
+  background-color: #ddd;
+}
+.center-alert {
+  position: fixed;
+  top: 20px; /* Adjust spacing from the top */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1050; /* Ensure it appears above other elements */
+  width: 80%; /* Adjust width as needed */
+  max-width: 600px; /* Optional: limit max width */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+.quantity-control {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.btn-qty {
+  width: 30px;
+  height: 30px;
+  background: #ddd;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.qty {
+  min-width: 20px;
+  text-align: center;
+  font-size: 16px;
+}
+
+// .rating {
+//   display: flex;
+//   gap: 10px;
+// }
+
+// .rating-label {
+//   display: flex;
+//   align-items: center;
+//   cursor: pointer;
+//   position: relative;
+// }
+
+// .rating input {
+//   display: none; /* Hide default checkbox */
+// }
+
+// .custom-checkbox {
+//   width: 20px;
+//   height: 20px;
+//   border: 2px solid #ccc;
+//   background-color: white;
+//   border-radius: 4px;
+//   display: inline-block;
+//   transition: background 0.3s ease;
+// }
+
+// .rating input:checked + .custom-checkbox {
+//   background-color: #FFD700; /* Gold when checked */
+//   border-color: #FFD700;
+// }
+
+// .rating-label:hover .custom-checkbox {
+//   background-color: #FFA500; /* Orange on hover */
+// }
+
+
+
+.rating {
+  font-size: 40px;
+  display: flex;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.fa {
+  transition: color 0.3s ease-in-out;
+}
+.fa {
+  font-size: 24px;
+  cursor: pointer;
+  color: #ffd700; /* Gold color for stars */
+}
+
+.fa-star-o {
+  color: #ccc; /* Gray color for empty stars */
+}
+/* Default empty stars */
+.fa-star-o {
+  color: #ccc; /* Light Gray */
+}
+
+/* Filled stars (selected or hovered) */
+.fa-star {
+  color: #FFD700; /* Gold */
+}
+
+/* Hover effect (temporarily fill stars) */
+.rating span:hover,
+.rating span:hover ~ span {
+  color: #FFA500 !important; /* Orange hover effect */
+}

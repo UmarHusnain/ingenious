@@ -1,90 +1,152 @@
-    <!--Page Title-->
-    <section class="page-title">
-      <!-- Background Layers -->
-      <div class="background-layers">
-          <div class="cws-image-bg" style="background-image: url(assets/images/background/37.jpg)">
-              <div class="cws-overlay-bg"></div>
-          </div>
-      </div>
+<!--Page Title-->
+<section class="page-title">
+    <!-- Background Layers -->
+    <div class="background-layers">
+        <div class="cws-image-bg" style="background-image: url(assets/images/background/37.jpg)">
+            <div class="cws-overlay-bg"></div>
+        </div>
+    </div>
 
-      <div class="auto-container">
-          <h1>Shopping Cart</h1>
-          <ul class="page-breadcrumb">
-              <li><a href="index.html">Home</a></li>
-              <li>Shopping Cart</li>
-          </ul>
-      </div>
-  </section>
-  <!--End Page Title-->
+    <div class="auto-container">
+        <h1>Shopping Cart</h1>
+        <ul class="page-breadcrumb">
+            <li><a routerLink="/">Home</a></li>
+            <li>Shopping Cart</li>
+        </ul>
+    </div>
+</section>
+<!--End Page Title-->
 
-  <!--Cart Section-->
-  <section class="cart-section">
-      <div class="auto-container">
-          <!--Cart Outer-->
-          <div class="cart-outer">
-              <div class="table-outer">
-                  <table class="cart-table">
-                      <thead class="cart-header">
-                          <tr>
-                              <th class="product-thumbnail">&nbsp;</th>
-                              <th class="product-name">Product</th>
-                              <th class="product-price">Price</th>
-                              <th class="product-quantity">Quantity</th>
-                              <th class="product-subtotal">Total</th>
-                              <th class="product-remove">&nbsp;</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr class="cart-item">
-                              <td class="product-thumbnail"><a href="shop-single.html"><img src="assets/images/resource/item-thumb-1.jpg" alt=""></a></td>
-                              <td class="product-name"><a href="shop-single.html">Night Security Cam 2Z1</a></td>
-                              <td class="product-price">$84.00</td>
-                              <td class="product-quantity"><div class="quantity"><label>Quantity</label><input type="number" class="qty" name="qty" value="1"> </div></td>
-                              <td class="product-subtotal"><span class="amount">$84.00</span></td>
-                              <td class="product-remove"> <a href="#" class="remove"><span class="fa fa-times"></span></a></td>
-                          </tr>
+<!--Cart Section-->
+<section class="cart-section">
+    <div class="auto-container">
+        <!--Cart Outer-->
+        <div class="cart-outer">
+            <div class="table-outer">
+                <table class="cart-table">
+                    <thead class="cart-header">
+                        <tr>
+                            <th class="product-thumbnail">&nbsp;</th>
+                            <th class="product-name">Product</th>
+                            <th class="product-price">Price</th>
+                            <th class="product-quantity">Quantity</th>
+                            <th class="product-subtotal">Total</th>
+                            <th class="product-remove">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="cart-item" *ngFor="let item of cartItems">
+                            <td class="product-thumbnail">
+                                <a routerLink="/product-detail"><img src="assets/images/resource/item-thumb-2.jpg"
+                                        alt="" /></a>
+                            </td>
+                            <td class="product-name">
+                                <a routerLink="/product-detail">
+                                    {{ item.productName }}
+                                    <span *ngIf="item.variationId">{{ ' (' + item.variationName + ')' }}</span>
+                                  </a>
+                                                              </td>
+                            <td class="product-price">Rs. {{ item.price }}</td>
+                            <td class="product-quantity">
+                                <div class="quantity-control">
+                                  <button type="button" class="btn-qty" (click)="changeQuantity(item, -1)">−</button>
+                                  <span class="qty">{{ item.quantity }}</span>
+                                  <button type="button" class="btn-qty" (click)="changeQuantity(item, 1)">+</button>
+                                </div>
+                              </td>
+                              
+                            <!-- <td class="product-quantity">
+                                <div class="quantity">
+                                    <input type="number" class="qty" [(ngModel)]="item.quantity"
+                                        (change)="updateCartItem(item, item.quantity)" />
+                                </div>
+                            </td> -->
+                            <td class="product-subtotal">
+                                <span class="amount">Rs. {{ item.price * item.quantity }}</span>
+                            </td>
+                            <td class="product-remove">
+                                <a (click)="openConfirmationModel(confirmationModal, item.cartId, item.aspNetUserId)"
+                                    class="remove">
+                                    <span class="fa fa-times"></span></a>
+                            </td>
+                            <!-- <td class="product-remove">
+                                <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="remove"><span
+                                        class="fa fa-times"></span></a>
+                            </td> -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-                          <tr class="cart-item">
-                              <td class="product-thumbnail"><a href="shop-single.html"><img src="assets/images/resource/item-thumb-2.jpg" alt=""></a></td>
-                              <td class="product-name"><a href="shop-single.html">Day Security Camera B2Z1</a></td>
-                              <td class="product-price">$15.00</td>
-                              <td class="product-quantity"><div class="quantity"><label>Quantity</label><input type="number" class="qty" name="qty" value="1"> </div></td>
-                              <td class="product-subtotal"><span class="amount">$15.00</span></td>
-                              <td class="product-remove"> <a href="#" class="remove"><span class="fa fa-times"></span></a></td>
-                          </tr>
-                      </tbody>
-                  </table>
-              </div>
+        <div class="row justify-content-between">
+            <div class="column col-lg-4 offset-lg-8 col-md-6 col-sm-12">
+                <!--Totals Table-->
+                <ul class="totals-table">
+                    <li>
+                        <h3>Cart Totals</h3>
+                    </li>
+                    <li class="clearfix">
+                        <span class="col">Subtotal</span><span class="col price">Rs. {{ totalAmount }}</span>
+                    </li>
+                    <li class="clearfix">
+                        <span class="col">Total</span><span class="col total-price">Rs. {{ totalAmount }}</span>
+                    </li>
+                    <li class="text-right">
+                        <button type="submit" (click)="proceedToCheckout()" class="theme-btn proceed-btn">
+                            Proceed to Checkout
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End Cart Section-->
 
-              <div class="cart-options clearfix">
-                  <div class="pull-left">
-                      <div class="apply-coupon clearfix">
-                          <div class="form-group clearfix">
-                              <input type="text" name="coupon-code" value="" placeholder="Coupon Code">
-                          </div>
-                          <div class="form-group clearfix">
-                              <button type="button" class="theme-btn coupon-btn">Apply Coupon</button>
-                          </div>
-                      </div>
-                  </div>
+@if (isLoading) {
+<div class="spinner-overlay">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+} @if (showAlert) {
+<div style="z-index: 999999" class="alert alert-dismissible fade show center-alert" [ngClass]="{
+    'alert-success': alertType === 'success',
+    'alert-danger': alertType === 'error'
+  }" role="alert">
+    {{ alertMessage }}
+    <button type="button" class="btn-close" aria-label="Close" (click)="closePopupMsg()"></button>
+</div>
+}
+<!-- Button trigger modal -->
 
-                  <div class="pull-right">
-                      <button type="button" class="theme-btn cart-btn">update cart</button>
-                  </div>
-              </div>
-          </div>
+<!-- delete cart modal -->
+<ng-template #confirmationModal data-bs-backdrop="non" let-c="close" let-d="dismiss" style="
+    position: absolute !important;
+    top: 0 !important;
+    z-index: 999999 !important;
+  ">
+    <div class="modal-header">
+        <h5 class="modal-title">Confirm Deletion</h5>
+        <button type="button" class="close" (click)="d('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 
-          <div class="row justify-content-between">
-              <div class="column col-lg-4 offset-lg-8 col-md-6 col-sm-12">
-                  <!--Totals Table-->
-                  <ul class="totals-table">
-                      <li><h3>Cart Totals</h3></li>
-                      <li class="clearfix"><span class="col">Subtotal</span><span class="col price">$186.00</span></li>
-                      <li class="clearfix"><span class="col">Total</span><span class="col total-price">$186.00</span></li>
-                      <li class="text-right"><button type="submit" class="theme-btn proceed-btn">Proceed to Checkout</button></li>
-                  </ul>
-              </div>
-          </div>
-      </div>
-  </section>
-  <!--End Cart Section-->
+    <div class="modal-body">
+        <p>Are you sure you want to delete this product?</p>
+        <small>This action cannot be undone.</small>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')"
+            style="color: #ffffff; background: green; border: none">
+            Go back
+        </button>
+        <button type="button" class="btn btn-outline-dark" (click)="c('yes')"
+            style="color: #ff005c; border: 1px solid #ff005c; background: none">
+            Delete
+        </button>
+    </div>
+</ng-template>

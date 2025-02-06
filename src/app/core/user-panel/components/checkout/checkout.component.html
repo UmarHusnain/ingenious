@@ -10,7 +10,7 @@
       <div class="auto-container">
           <h1>Checkout</h1>
           <ul class="page-breadcrumb">
-              <li><a href="index.html">Home</a></li>
+              <li><a routerLink="/">Home</a></li>
               <li>Checkout</li>
           </ul>
       </div>
@@ -25,13 +25,13 @@
               <div class="message-box with-icon success">
                   <div class="icon-box"><span class="icon fa fa-check"></span></div>
                   <p>Have a coupon?</p>
-                  <h4><a href="#">Click here to enter your code</a></h4>
+                  <h4><a routerLink="#">Click here to enter your code</a></h4>
               </div>
           </div>
 
           <!--Checkout Details-->
           <div class="checkout-form">
-              <form method="post" action="checkout.html">
+              <form >
                   <div class="row clearfix">
                       <!--Column-->
                       <div class="column col-lg-6 col-md-12 col-sm-12">
@@ -388,32 +388,24 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr class="cart-item">
-                          <td class="product-name">Night Security Cam 2Z1 &nbsp;
-                              <strong class="product-quantity">× 1</strong>
-                          </td>
-                          <td class="product-total">
-                              <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>84.00</span>
-                          </td>
-                      </tr>
-
-                      <tr class="cart-item">
-                          <td class="product-name">Day Security Camera B2Z1 &nbsp;
-                              <strong class="product-quantity">× 1</strong>
-                          </td>
-                          <td class="product-total">
-                              <span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>84.00</span>
-                          </td>
+                    <tr *ngFor="let item of cartItems" class="cart-item">
+                        <td class="product-name">
+                          {{ item.productName }} &nbsp;
+                          <strong class="product-quantity">× {{ item.quantity }}</strong>
+                        </td>
+                        <td class="product-total">
+                          <span class="amount">Rs. {{ item.price * item.quantity }}</span>
+                        </td>
                       </tr>
                   </tbody>
                   <tfoot>
                       <tr class="cart-subtotal">
                           <th>Subtotal</th>
-                          <td><span class="amount">$186.00</span></td>
+                          <td><span class="amount">Rs. {{ subtotal }}</span></td>
                       </tr>
                       <tr class="order-total">
                           <th>Total</th>
-                          <td><strong class="amount">$186.00</strong> </td>
+                          <td><strong class="amount">Rs. {{ total }}</strong> </td>
                       </tr>
                   </tfoot>
               </table>
@@ -446,11 +438,11 @@
                               </div>
                           </li>
                       </ul>
-                      <div class="text">Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="#">privacy policy.</a></div>
+                      <div class="text">Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a routerLink="#">privacy policy.</a></div>
                   </div>
               </div>
               <div class="lower-box">
-                  <a href="#" class="theme-btn"><span class="btn-title">Place Order</span></a>
+                  <a routerLink="#" class="theme-btn"><span class="btn-title">Place Order</span></a>
               </div>
           </div>
           <!--End Payment Box-->
