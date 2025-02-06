@@ -12,6 +12,34 @@
                 <nav class="main-menu navbar-expand-md navbar-light">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navigation clearfix">
+                            <li [ngClass]="{'active': isActive('/')}">
+                                <a routerLink="/"><span>home</span></a>
+                            </li>
+                            <li class="dropdown" [ngClass]="{'active': isActive('/services')}">
+                                <a routerLink="/services"><span>Services</span></a>
+                                <ul>
+                                    <li [ngClass]="{'active': isActive('/smart-lighting')}"><a routerLink="/smart-lighting">Smart Lighting</a></li>
+                                    <li [ngClass]="{'active': isActive('/surveillance-security')}"><a routerLink="/surveillance-security">Surveillance and Security</a></li>
+                                    <li [ngClass]="{'active': isActive('/energy-management')}"><a routerLink="/energy-management">Energy Management</a></li>
+                                    <li [ngClass]="{'active': isActive('/smart-garden')}"><a routerLink="/smart-garden">Smart Garden</a></li>
+                                    <li [ngClass]="{'active': isActive('/climate-control')}"><a routerLink="/climate-control">Climate Control</a></li>
+                                    <li [ngClass]="{'active': isActive('/water-management')}"><a routerLink="/water-management">Water Management</a></li>
+                                </ul>
+                            </li>
+                            <li [ngClass]="{'active': isActive('/about')}"><a routerLink="/about">About Us</a></li>
+                            <li [ngClass]="{'active': isActive('/contact')}"><a routerLink="/contact">Contacts</a></li>
+                            <li class="dropdown" [ngClass]="{'active': isActive('/shop')}">
+                                <a routerLink="/shop"><span>Shop</span></a>
+                                <ul>
+                                    <li [ngClass]="{'active': isActive('/shop')}"><a routerLink="/shop">Shop</a></li>
+                                    <li [ngClass]="{'active': isActive('/wishlist')}"><a routerLink="/wishlist">WishList</a></li>
+                                    <li [ngClass]="{'active': isActive('/cart')}"><a routerLink="/cart">Cart</a></li>
+                                    <li [ngClass]="{'active': isActive('/checkout')}"><a routerLink="/checkout">Checkout</a></li>
+                                </ul>
+                            </li>
+                            <li [ngClass]="{'active': isActive('/price-calculator')}"><a routerLink="/price-calculator">Price Calculator</a></li>
+                        </ul>
+                        <!-- <ul class="navigation clearfix">
                             <li class="current">
                                 <a routerLink="/"><span>home</span></a>
                             </li>
@@ -40,7 +68,7 @@
                             </li>
                             <li><a routerLink="/price-calculator">Price Calculator</a></li>
 
-                        </ul>
+                        </ul> -->
                     </div>
                 </nav>
                 <!-- Main Menu End-->
