@@ -2,7 +2,7 @@
 <section class="page-title">
     <!-- Background Layers -->
     <div class="background-layers">
-        <div class="cws-image-bg" style="background-image: url(assets/images/background/37.jpg)">
+        <div class="cws-image-bg" style="background-image: url(assets/userAssets/images/background/37.jpg)">
             <div class="cws-overlay-bg"></div>
         </div>
     </div>
@@ -32,26 +32,26 @@
     <div class="auto-container">
         <div class="row clearfix">
             <!--Content Side-->
-            <div class="content-side col-lg-9 col-md-12 col-sm-12">
+            <div class="content-side col-lg-12 col-md-12 col-sm-12">
                 <div class="our-shop no-padding style-two">
                     <div class="shop-upper-box clearfix">
                         <div class="items-label">Showing all {{ wishListProduct.length }} results</div>
                         <div class="orderby">
-                            <select name="orderby" class="sortby-select select2-offscreen">
+                            <select name="orderby" class="sortby-select" (change)="sortWishlist($event)">
                                 <option value="price">Sort by price: low to high</option>
                                 <option value="price-desc">Sort by price: high to low</option>
-                            </select>
+                              </select>
+                              
                         </div>
                     </div>
 
                     <div class="row clearfix">
-                        <div class="shop-item col-lg-4 col-md-6 col-sm-12" *ngFor="let wishlist of wishListProduct">
+                        <div class="shop-item col-lg-3 col-md-6 col-sm-12" *ngFor="let wishlist of wishListProduct">
                             <div class="inner-box">
                                 <div class="image-box">
                                     <figure class="image">
                                         <a>
-
-                                            <img src="assets/images/resource/item-thumb-1.jpg">
+                                            <img src="assets/userAssets/images/resource/item-thumb-1.jpg">
                                         </a>
                                     </figure>
 
@@ -70,31 +70,7 @@
                 </div>
             </div>
 
-            <!--Sidebar Side-->
-            <div class="sidebar-side sticky-container col-lg-3 col-md-12 col-sm-12">
-                <aside class="sidebar theiaStickySidebar">
-                    <div class="sticky-sidebar">
-
-                        <!-- Category  Widget -->
-                        <div class="sidebar-widget category-widget">
-                            <div class="widget-content">
-                                <h3 class="widget-title">Categories</h3>
-                                <ul class="categories-list">
-                                    <li *ngFor="let category of categories">
-                                        <a [routerLink]="'/shop/'">
-                                            {{ category.name }} ({{ category.totalProducts }})
-                                        </a>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </div>
-
-
-
-                    </div>
-                </aside>
-            </div>
+           
         </div>
     </div>
 </div>

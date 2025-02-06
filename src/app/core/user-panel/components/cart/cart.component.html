@@ -2,7 +2,7 @@
 <section class="page-title">
     <!-- Background Layers -->
     <div class="background-layers">
-        <div class="cws-image-bg" style="background-image: url(assets/images/background/37.jpg)">
+        <div class="cws-image-bg" style="background-image: url(assets/userAssets/images/background/37.jpg)">
             <div class="cws-overlay-bg"></div>
         </div>
     </div>
@@ -37,24 +37,24 @@
                     <tbody>
                         <tr class="cart-item" *ngFor="let item of cartItems">
                             <td class="product-thumbnail">
-                                <a routerLink="/product-detail"><img src="assets/images/resource/item-thumb-2.jpg"
+                                <a routerLink="/product-detail"><img src="assets/userAssets/images/resource/item-thumb-2.jpg"
                                         alt="" /></a>
                             </td>
                             <td class="product-name">
                                 <a routerLink="/product-detail">
                                     {{ item.productName }}
                                     <span *ngIf="item.variationId">{{ ' (' + item.variationName + ')' }}</span>
-                                  </a>
-                                                              </td>
+                                </a>
+                            </td>
                             <td class="product-price">Rs. {{ item.price }}</td>
                             <td class="product-quantity">
                                 <div class="quantity-control">
-                                  <button type="button" class="btn-qty" (click)="changeQuantity(item, -1)">−</button>
-                                  <span class="qty">{{ item.quantity }}</span>
-                                  <button type="button" class="btn-qty" (click)="changeQuantity(item, 1)">+</button>
+                                    <button type="button" class="btn-qty" (click)="changeQuantity(item, -1)">−</button>
+                                    <span class="qty">{{ item.quantity }}</span>
+                                    <button type="button" class="btn-qty" (click)="changeQuantity(item, 1)">+</button>
                                 </div>
-                              </td>
-                              
+                            </td>
+
                             <!-- <td class="product-quantity">
                                 <div class="quantity">
                                     <input type="number" class="qty" [(ngModel)]="item.quantity"
@@ -122,14 +122,10 @@
 <!-- Button trigger modal -->
 
 <!-- delete cart modal -->
-<ng-template #confirmationModal data-bs-backdrop="non" let-c="close" let-d="dismiss" style="
-    position: absolute !important;
-    top: 0 !important;
-    z-index: 999999 !important;
-  ">
-    <div class="modal-header">
+<ng-template #confirmationModal data-bs-backdrop="non" let-c="close" let-d="dismiss" style="z-index: 999999 !important;">
+    <div class="modal-header d-flex justify-content-between align-items-center">
         <h5 class="modal-title">Confirm Deletion</h5>
-        <button type="button" class="close" (click)="d('Cross click')" aria-label="Close">
+        <button type="button" class="close-button" (click)="d('Cross click')" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>

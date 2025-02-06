@@ -18,7 +18,6 @@ import { ReviewsService } from "../../../services/reviews.service";
   styleUrl: "./product-detail.component.scss",
 })
 export class ProductDetailComponent {
-  categories: ICategory[] = [];
   isLoading: boolean = false;
   product: any;
   selectedVariation: any = null;
@@ -58,38 +57,27 @@ export class ProductDetailComponent {
   }
 
   ngOnInit(): void {
-    this.loadCategories();
     if (!this.product) {
       this.router.navigate(["/shop"]);
     }
 
     this.loadReviews();
   }
-  // Fetch categories from the service
-  loadCategories(): void {
-    this.isLoading = true;
-    this.categoryService.getCategories().subscribe({
-      next: (response) => {
-        this.categories = response.data;
-        this.isLoading = false;
-      },
-      error: (error) => {
-        console.error("Failed to load categories:", error);
-        this.isLoading = false;
-      },
-    });
-  }
+
 
   loadReviews(): void {
+    this.isLoading = true;
     this.reviewsService
       .getReviewsByProductId(this.product.productId)
       .subscribe({
         next: (response) => {
           console.log("review result: ", response);
           this.reviews = response.data || [];
+          this.isLoading = false;
         },
         error: (error) => {
           console.error("Failed to load reviews:", error);
+          this.isLoading = false;
         },
       });
   }

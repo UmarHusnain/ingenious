@@ -3,11 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { ICategory } from '../Interfaces/ICategory';
 import { IEditCategory } from '../Interfaces/ICategory';
+import { environment } from '../../../../environment/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriesService {
-  private apiUrl = 'https://localhost:7021/api/Categories';
+  private apiUrl = `${environment.baseUrl}Categories`;
   constructor(private http: HttpClient) { } 
     getCategories(): Observable<ICategory[]> {
       return this.http.get<{ data: ICategory[] }>(`${this.apiUrl}/GetCategories`).pipe(

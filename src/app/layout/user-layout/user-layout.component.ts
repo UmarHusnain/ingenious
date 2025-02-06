@@ -50,14 +50,16 @@ export class UserLayoutComponent implements OnDestroy {
 
   loadStyles(): void {
     const styles = [
-      'assets/css/bootstrap.css',
-      'assets/plugins/revolution/css/settings.css',
-      'assets/plugins/revolution/css/layers.css',
-      'assets/plugins/revolution/css/navigation.css',
-      'assets/css/style.css',
-      'assets/css/responsive.css',
-      'assets/css/odometer.css',
-      'assets/css/bootstrap.css',
+      'assets/userAssets/css/bootstrap.css',
+      // 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css',
+      'assets/userAssets/plugins/revolution/css/settings.css',
+      'assets/userAssets/plugins/revolution/css/layers.css',
+      'assets/userAssets/plugins/revolution/css/navigation.css',
+      'assets/userAssets/css/style.css',
+      'assets/userAssets/css/responsive.css',
+      'assets/userAssets/css/odometer.css',
+      'assets/userAssets/css/bootstrap.css',
+      // 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css',
       'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
     ];
 
@@ -71,22 +73,22 @@ export class UserLayoutComponent implements OnDestroy {
     // Add favicons
     const favicon1 = this.renderer.createElement('link');
     favicon1.rel = 'shortcut icon';
-    favicon1.href = 'images/favicon.png';
+    favicon1.href = 'assets/userAssets/images/favicon.png';
     this.renderer.appendChild(this.document.head, favicon1);
 
     const favicon2 = this.renderer.createElement('link');
     favicon2.rel = 'icon';
-    favicon2.href = 'images/favicon.png';
+    favicon2.href = 'assets/userAssets/images/favicon.png';
     this.renderer.appendChild(this.document.head, favicon2);
   }
 
   loadScripts(): void {
-    this.loadScript('assets/js/jquery.js', () => {
-      this.loadScript('assets/js/popper.min.js', () => {
-        this.loadScript('assets/js/bootstrap.min.js', () => {
+    this.loadScript('assets/userAssets/js/jquery.js', () => {
+      this.loadScript('assets/userAssets/js/popper.min.js', () => {
+        this.loadScript('assets/userAssets/js/bootstrap.min.js', () => {
           this.loadScript('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js', () => {
-          this.loadScript('assets/plugins/revolution/js/jquery.themepunch.revolution.min.js', () => {
-            this.loadScript('assets/plugins/revolution/js/jquery.themepunch.tools.min.js', () => {
+          this.loadScript('assets/userAssets/plugins/revolution/js/jquery.themepunch.revolution.min.js', () => {
+            this.loadScript('assets/userAssets/plugins/revolution/js/jquery.themepunch.tools.min.js', () => {
               this.loadRemainingScripts(); 
             });
           });
@@ -98,22 +100,22 @@ export class UserLayoutComponent implements OnDestroy {
 
   loadRemainingScripts(): void {
     const scripts = [
-      'assets/plugins/revolution/js/extensions/revolution.extension.actions.min.js',
-      'assets/plugins/revolution/js/extensions/revolution.extension.carousel.min.js',
-      'assets/plugins/revolution/js/extensions/revolution.extension.kenburn.min.js',
-      'assets/plugins/revolution/js/extensions/revolution.extension.layeranimation.min.js',
-      'assets/plugins/revolution/js/extensions/revolution.extension.migration.min.js',
-      'assets/plugins/revolution/js/extensions/revolution.extension.navigation.min.js',
-      'assets/plugins/revolution/js/extensions/revolution.extension.parallax.min.js',
-      'assets/plugins/revolution/js/extensions/revolution.extension.slideanims.min.js',
-      'assets/plugins/revolution/js/extensions/revolution.extension.video.min.js',
-      'assets/js/main-slider-script.js',
-      'assets/js/knob.js',
-      'assets/js/jquery.fancybox.js',
-      'assets/js/owl.js',
-      'assets/js/wow.js',
-      'assets/js/appear.js',
-      'assets/js/script.js',
+      'assets/userAssets/plugins/revolution/js/extensions/revolution.extension.actions.min.js',
+      'assets/userAssets/plugins/revolution/js/extensions/revolution.extension.carousel.min.js',
+      'assets/userAssets/plugins/revolution/js/extensions/revolution.extension.kenburn.min.js',
+      'assets/userAssets/plugins/revolution/js/extensions/revolution.extension.layeranimation.min.js',
+      'assets/userAssets/plugins/revolution/js/extensions/revolution.extension.migration.min.js',
+      'assets/userAssets/plugins/revolution/js/extensions/revolution.extension.navigation.min.js',
+      'assets/userAssets/plugins/revolution/js/extensions/revolution.extension.parallax.min.js',
+      'assets/userAssets/plugins/revolution/js/extensions/revolution.extension.slideanims.min.js',
+      'assets/userAssets/plugins/revolution/js/extensions/revolution.extension.video.min.js',
+      'assets/userAssets/js/main-slider-script.js',
+      'assets/userAssets/js/knob.js',
+      'assets/userAssets/js/jquery.fancybox.js',
+      'assets/userAssets/js/owl.js',
+      'assets/userAssets/js/wow.js',
+      'assets/userAssets/js/appear.js',
+      'assets/userAssets/js/script.js',
     ];
 
     scripts.forEach((scriptUrl) => this.loadScript(scriptUrl));

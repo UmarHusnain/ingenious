@@ -3,8 +3,8 @@
     <!-- Main box -->
     <div class="main-box">
         <div class="menu-box">
-            <div class="logo"><a routerLink="/"><img class="logoImg" ngSrc="assets/images/logo.png" priority alt="" title=""
-                        srcset="assets/images/logo.png 2x"></a></div>
+            <div class="logo"><a routerLink="/"><img class="logoImg" ngSrc="assets/userAssets/images/logo.png" priority alt="" title=""
+                        srcset="assets/userAssets/images/logo.png 2x"></a></div>
 
             <!--Nav Box-->
             <div class="nav-outer">
@@ -12,6 +12,34 @@
                 <nav class="main-menu navbar-expand-md navbar-light">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navigation clearfix">
+                            <li [ngClass]="{'active': isActive('/')}">
+                                <a routerLink="/"><span>home</span></a>
+                            </li>
+                            <li class="dropdown" [ngClass]="{'active': isActive('/services')}">
+                                <a routerLink="/services"><span>Services</span></a>
+                                <ul>
+                                    <li [ngClass]="{'active': isActive('/smart-lighting')}"><a routerLink="/smart-lighting">Smart Lighting</a></li>
+                                    <li [ngClass]="{'active': isActive('/surveillance-security')}"><a routerLink="/surveillance-security">Surveillance and Security</a></li>
+                                    <li [ngClass]="{'active': isActive('/energy-management')}"><a routerLink="/energy-management">Energy Management</a></li>
+                                    <li [ngClass]="{'active': isActive('/smart-garden')}"><a routerLink="/smart-garden">Smart Garden</a></li>
+                                    <li [ngClass]="{'active': isActive('/climate-control')}"><a routerLink="/climate-control">Climate Control</a></li>
+                                    <li [ngClass]="{'active': isActive('/water-management')}"><a routerLink="/water-management">Water Management</a></li>
+                                </ul>
+                            </li>
+                            <li [ngClass]="{'active': isActive('/about')}"><a routerLink="/about">About Us</a></li>
+                            <li [ngClass]="{'active': isActive('/contact')}"><a routerLink="/contact">Contacts</a></li>
+                            <li class="dropdown" [ngClass]="{'active': isActive('/shop')}">
+                                <a routerLink="/shop"><span>Shop</span></a>
+                                <ul>
+                                    <li [ngClass]="{'active': isActive('/shop')}"><a routerLink="/shop">Shop</a></li>
+                                    <li [ngClass]="{'active': isActive('/wishlist')}"><a routerLink="/wishlist">WishList</a></li>
+                                    <li [ngClass]="{'active': isActive('/cart')}"><a routerLink="/cart">Cart</a></li>
+                                    <li [ngClass]="{'active': isActive('/checkout')}"><a routerLink="/checkout">Checkout</a></li>
+                                </ul>
+                            </li>
+                            <li [ngClass]="{'active': isActive('/price-calculator')}"><a routerLink="/price-calculator">Price Calculator</a></li>
+                        </ul>
+                        <!-- <ul class="navigation clearfix">
                             <li class="current">
                                 <a routerLink="/"><span>home</span></a>
                             </li>
@@ -40,7 +68,7 @@
                             </li>
                             <li><a routerLink="/price-calculator">Price Calculator</a></li>
 
-                        </ul>
+                        </ul> -->
                     </div>
                 </nav>
                 <!-- Main Menu End-->
@@ -56,7 +84,7 @@
                         <div class="shopping-cart" *ngIf="cartItems.length > 0">
                             <ul class="shopping-cart-items">
                                 <li class="cart-item" *ngFor="let item of cartItems">
-                                    <img src="assets/images/resource/item-thumb-2.jpg" alt="#" class="thumb" />
+                                    <img src="assets/userAssets/images/resource/item-thumb-2.jpg" alt="#" class="thumb" />
                                     <span class="item-name">{{ item.productName }}</span>
                                     <span class="item-quantity">{{ item.quantity }} x
                                         <span class="item-amount">Rs. {{ item.price }}</span>
@@ -89,7 +117,7 @@
         <div class="outer-box">
             <!--Logo-->
             <div class="logo">
-                <a routerLink="#" title="Sticky Logo"><img src="assets/images/sticky-logo.png" alt="Sticky Logo"></a>
+                <a routerLink="#" title="Sticky Logo"><img src="assets/userAssets/images/sticky-logo.png" alt="Sticky Logo"></a>
             </div>
 
             <!--Nav Outer-->
@@ -104,8 +132,8 @@
 
     <!-- Mobile Header -->
     <div class="mobile-header">
-        <div class="logo"><a routerLink="index.html"><img src="assets/images/logo.png" alt="" title=""
-                    srcset="assets/images/logo-white-big.png 2x"></a></div>
+        <div class="logo"><a routerLink="index.html"><img src="assets/userAssets/images/logo.png" alt="" title=""
+                    srcset="assets/userAssets/images/logo-white-big.png 2x"></a></div>
 
         <!--Nav Box-->
         <div class="nav-outer clearfix">
@@ -116,8 +144,8 @@
     <!-- Mobile Menu  -->
     <div class="mobile-menu">
         <nav class="menu-box">
-            <div class="nav-logo"><a routerLink="index.html"><img src="assets/images/logo.png" alt="" title=""
-                        srcset="assets/images/logo-white-big.png 2x"></a></div>
+            <div class="nav-logo"><a routerLink="index.html"><img src="assets/userAssets/images/logo.png" alt="" title=""
+                        srcset="assets/userAssets/images/logo-white-big.png 2x"></a></div>
         </nav>
     </div><!-- End Mobile Menu -->
 
