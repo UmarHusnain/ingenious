@@ -1,0 +1,16 @@
+.form-check-input:checked {
+    background-color: #2a4772;
+    border-color: #2a4772;
+  }
+  
+  .form-check-input:disabled {
+    pointer-events: none;
+    filter: none;
+    opacity: 1;
+  }
+  
+  .form-check-input:disabled ~ .form-check-label,
+  .form-check-input[disabled] ~ .form-check-label {
+    cursor: default;
+    opacity: 1;
+}
