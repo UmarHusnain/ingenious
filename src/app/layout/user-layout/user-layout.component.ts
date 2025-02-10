@@ -9,6 +9,8 @@ import { CommonModule, DOCUMENT } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { FooterComponent } from '../../shared/components/footer/footer.component';
 import { HeaderComponent } from '../../shared/components/header/header.component';
+import { AuthService } from '../../core/auth/Services/auth.service';
+import { LocalStorageService } from '../../core/auth/Services/localStorage.service';
 
 @Component({
   selector: 'app-user-layout',
@@ -19,7 +21,8 @@ import { HeaderComponent } from '../../shared/components/header/header.component
       RouterOutlet,
       CommonModule,],
   templateUrl: './user-layout.component.html',
-  styleUrl: './user-layout.component.scss'
+  styleUrl: './user-layout.component.scss',
+  providers: [AuthService, LocalStorageService]
 })
 export class UserLayoutComponent implements OnDestroy {
   private routerSubscription!: Subscription;

@@ -1,68 +1,81 @@
-<div class="container">
-      <div *ngIf="isLoading" class="spinner-overlay">
-        <div class="spinner-border text-primary" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
-      </div>
-    
-      <div *ngIf="showAlert" class="alert alert-dismissible fade show center-alert" [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
-        {{ alertMessage }}
-        <button type="button" class="btn-close" aria-label="Close" (click)="closePopupMsg()">X</button>
-      </div>
-    
-      <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-          <div class="login-box">
-            <div class="login-logo">
-              <a href="../../index2.html"><b>Admin</b>LTE</a>
-            </div>
-            <div class="card">
-              <div class="card-body login-card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
-                <form (ngSubmit)="onLogin()">
-                  <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Email" [(ngModel)]="credentials.email" name="email" required>
-                    <div class="input-group-append">
-                      <div class="input-group-text">
-                        <span class="fas fa-envelope"></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Password" [(ngModel)]="credentials.password" name="password" required>
-                    <div class="input-group-append">
-                      <div class="input-group-text">
-                        <span class="fas fa-lock"></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-4">
-                      <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-                    </div>
-                  </div>
-                </form>
-                <div class="social-auth-links text-center mb-3">
-                  <p>- OR -</p>
-                  <a href="#" class="btn btn-block btn-primary">
-                    <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-                  </a>
-                  <a href="#" class="btn btn-block btn-danger">
-                    <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-                  </a>
-                </div>
-                <p class="mb-1">
-                  <a href="forgot-password.html">I forgot my password</a>
-                </p>
-                <p class="mb-0">
-                  <a href="register.html" class="text-center">Register a new membership</a>
-                </p>
-              </div>
-            </div>
+<!--Page Title-->
+<section class="page-title">
+  <!-- Background Layers -->
+  <div class="background-layers">
+    <div class="cws-image-bg" style="background-image: url(images/background/37.jpg)">
+      <div class="cws-overlay-bg"></div>
+    </div>
+  </div>
+
+  <div class="auto-container">
+    <h1>Login</h1>
+   
+  </div>
+</section>
+<!--End Page Title-->
+
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<div *ngIf="showAlert" class="alert alert-dismissible fade show center-alert"
+  [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
+  {{ alertMessage }}
+  <button type="button" class="btn-close" aria-label="Close" (click)="closePopupMsg()">X</button>
+</div>
+
+<!--Login Section-->
+<!-- Login Section -->
+<section class="login-section">
+  <div class="auto-container">
+    <div class="card">
+     
+      <div class="card-body">
+        <!-- Login Form -->
+        <form (ngSubmit)="onLogin()">
+          <!-- Username/Email -->
+          <div class="form-group">
+            <label>Username or Email *</label>
+            <input type="text" class="form-control" name="username" placeholder="Enter username or email" [(ngModel)]="credentials.email" required>
           </div>
-        </div>
-        <div class="col-md-4"></div>
+
+          <!-- Password -->
+          <div class="form-group">
+            <label>Password *</label>
+            <input type="password" class="form-control" name="password" placeholder="Enter password" [(ngModel)]="credentials.password" required>
+          </div>
+
+          <!-- Remember Me Checkbox -->
+          <div class="form-group mt-2">
+            <input type="checkbox" name="rememberMe" id="account-option-1">
+            <label for="account-option-1">Remember me</label>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="form-group text-center mt-4">
+            <input class="btn btn-primary btn-lg w-100" type="submit" name="submit-form" value="Log in">
+          </div>
+
+          <!-- Forgot Password & Register Link -->
+          <div class="form-group text-center mt-3">
+            <a href="#" class="psw">Lost your password?</a>
+          </div>
+          <div class="form-group text-center mt-2">
+            <a routerLink="/register" class="psw">Don't have an account? Register here</a>
+          </div>
+        </form>
       </div>
     </div>
-    
+  </div>
+</section>
+
+<!--End Login Section-->
+
+
+
+
+
+
+

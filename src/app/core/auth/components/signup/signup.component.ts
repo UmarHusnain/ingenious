@@ -87,12 +87,8 @@ constructor(
   }
   loadStyles(): void {
     const styles = [
-      "https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css",
-      "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback",
-      "./assets/adminAssets/plugins/fontawesome-free/css/all.min.css",
-      "./assets/adminAssets/plugins/fontawesome-free/css/fontawesome.min.css",
-      "./assets/adminAssets/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
-      "./assets/adminAssets/dist/css/adminlte.min.css",
+     'assets/userAssets/css/style.css',
+      'assets/userAssets/css/responsive.css',
     ];
 
     styles.forEach((styleUrl) => {
@@ -115,9 +111,9 @@ constructor(
   }
   private loadAdminScripts(): Promise<void> {
   
-    return this.loadScript('./assets/adminAssets/plugins/jquery/jquery.min.js')
-      .then(() => this.loadScript('./assets/adminAssets/plugins/bootstrap/js/bootstrap.bundle.min.js'))
-      .then(() => this.loadScript('./assets/adminAssets/dist/js/adminlte.min.js'))
+    return this.loadScript('./assets/userAssets/js/jquery.js')
+      .then(() => this.loadScript('./assets/userAssets/js/bootstrap.min.js'))
+      .then(() => this.loadScript('./assets/userAssets/js/popper.min.js'))
       .then(() => Promise.resolve());
   }
   private loadScript(src: string): Promise<void> {

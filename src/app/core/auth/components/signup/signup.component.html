@@ -1,113 +1,120 @@
-<div class="container">
-  @if (isLoading) {
-    <div class="spinner-overlay">
-        <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
+<!--Page Title-->
+<section class="page-title">
+  <!-- Background Layers -->
+  <div class="background-layers">
+    <div class="cws-image-bg" style="background-image: url(images/background/37.jpg)">
+      <div class="cws-overlay-bg"></div>
     </div>
-    }
-    
-    @if (showAlert) {
-    <div style="z-index: 999999;" class="alert alert-dismissible fade show center-alert"
-        [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
-        {{ alertMessage }}
-        <button type="button" class="btn-close" aria-label="Close" (click)="closePopupMsg()">X</button>
-    </div>
-    }
-  <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-      <div class="signup-box">
-        <div class="card">
-          <div class="card-body register-card-body">
-            <p class="login-box-msg">Register a new membership</p>
+  </div>
 
-            <form [formGroup]="registerForm" >
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Full name" formControlName="fullName">
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <span class="fas fa-user"></span>
-                  </div>
-                </div>
-              </div>
-              <div class="input-group mb-3">
-                <input type="email" class="form-control" placeholder="Email" formControlName="username">
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <span class="fas fa-envelope"></span>
-                  </div>
-                </div>
-              </div>
-              <div class="input-group mb-3">
-                <input type="password" class="form-control" placeholder="Password" formControlName="password">
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <span class="fas fa-lock"></span>
-                  </div>
-                </div>
-              </div>
-              <div class="input-group mb-3">
-                <input type="password" class="form-control" placeholder="Retype password">
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <span class="fas fa-lock"></span>
-                  </div>
-                </div>
-              </div>
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Contact Number" formControlName="contactNumber">
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <span class="fas fa-phone"></span>
-                  </div>
-                </div>
-              </div>
-              <div formGroupName="address">
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Street" formControlName="street">
-                </div>
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="City" formControlName="city">
-                </div>
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="State" formControlName="state">
-                </div>
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Postal Code" formControlName="postalCode">
-                </div>
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Country" formControlName="country">
-                </div>
-                <div class="form-check">
-                  <input type="checkbox" class="form-check-input" formControlName="isDefault">
-                  <label class="form-check-label" for="isDefault">Is Default</label>
-                </div>
-              </div>
-              <div class="row">
-              <div class="col-4"></div>
-                <div class="col-4">
-                  <button type="submit" class="btn btn-primary btn-block" [disabled]="registerForm.invalid" (click)="onSubmit()">Register</button>
-                </div>
-              </div>
-            </form>
-            <div class="social-auth-links text-center">
-              <p>- OR -</p>
-              <a href="#" class="btn btn-block btn-primary">
-                <i class="fab fa-facebook mr-2"></i>
-                Sign up using Facebook
-              </a>
-              <a href="#" class="btn btn-block btn-danger">
-                <i class="fab fa-google-plus mr-2"></i>
-                Sign up using Google+
-              </a>
+  <div class="auto-container">
+    <h1>Register</h1>
+   
+  </div>
+</section>
+<!--End Page Title-->
+
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<div *ngIf="showAlert" class="alert alert-dismissible fade show center-alert"
+  [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
+  {{ alertMessage }}
+  <button type="button" class="btn-close" aria-label="Close" (click)="closePopupMsg()">X</button>
+</div>
+
+<!--Login Section-->
+<!-- Register Section -->
+<section class="register-section">
+  <div class="auto-container">
+    <div class="card">
+     
+      <div class="card-body">
+        <!-- Registration Form -->
+        <form [formGroup]="registerForm">
+          <!-- First Row: Full Name & Username -->
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label>Full Name</label>
+              <input type="text" class="form-control" name="fullName" placeholder="Enter full name" formControlName="fullName" required>
             </div>
 
-            <a routerLink="/login" class="text-center">I already have a membership</a>
+            <div class="col-md-6 form-group">
+              <label>Username</label>
+              <input type="text" class="form-control" name="username" placeholder="Enter username" formControlName="username" required>
+            </div>
           </div>
+
+          <!-- Second Row: Contact & Street -->
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label>Contact</label>
+              <input type="text" class="form-control" name="contactNumber" placeholder="Enter contact number" formControlName="contactNumber" required>
+            </div>
+
+            <div class="col-md-6 form-group">
+              <label>Street</label>
+              <input type="text" class="form-control" name="street" placeholder="Enter street" formControlName="street" required>
+            </div>
+          </div>
+
+          <!-- Third Row: City & State -->
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label>City</label>
+              <input type="text" class="form-control" name="city" placeholder="Enter city" formControlName="city" required>
+            </div>
+
+            <div class="col-md-6 form-group">
+              <label>State</label>
+              <input type="text" class="form-control" name="state" placeholder="Enter state" formControlName="state" required>
+            </div>
+          </div>
+
+          <!-- Fourth Row: Postal Code & Country -->
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label>Postal Code</label>
+              <input type="text" class="form-control" name="postalCode" placeholder="Enter postal code" formControlName="postalCode" required>
+            </div>
+
+            <div class="col-md-6 form-group">
+              <label>Country</label>
+              <input type="text" class="form-control" name="country" placeholder="Enter country" formControlName="country" required>
+            </div>
+          </div>
+
+          <!-- Fifth Row: Password & Confirm Password -->
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label>Password *</label>
+              <input type="password" class="form-control" name="password" placeholder="Enter password" formControlName="password" required>
+            </div>
+
+            <div class="col-md-6 form-group">
+              <label>Re-Type Password *</label>
+              <input type="password" class="form-control" name="retypePassword" placeholder="Re-enter password" required>
+            </div>
+          </div>
+
+        
+
+          <!-- Submit Button -->
+          <div class="form-group text-center mt-4">
+            <input class="btn btn-primary btn-lg w-100" type="submit" name="submit-form" [disabled]="registerForm.invalid" (click)="onSubmit()" value="Register">
+          </div>
+        </form>
+
+        <div class="form-group text-center mt-3">
+          <a routerLink="/login" class="psw">I already have a membership</a>
         </div>
       </div>
     </div>
-    <div class="col-md-4"></div>
   </div>
-</div>
+</section>
+
+<!--End Login Section-->
+

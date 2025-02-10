@@ -3,8 +3,8 @@
     <!-- Main box -->
     <div class="main-box">
         <div class="menu-box">
-            <div class="logo"><a routerLink="/"><img class="logoImg" ngSrc="assets/userAssets/images/logo.png" priority alt="" title=""
-                        srcset="assets/userAssets/images/logo.png 2x"></a></div>
+            <div class="logo"><a routerLink="/"><img class="logoImg" ngSrc="assets/userAssets/images/logo.png" priority
+                        alt="" title="" srcset="assets/userAssets/images/logo.png 2x"></a></div>
 
             <!--Nav Box-->
             <div class="nav-outer">
@@ -18,12 +18,18 @@
                             <li class="dropdown" [ngClass]="{'active': isActive('/services')}">
                                 <a routerLink="/services"><span>Services</span></a>
                                 <ul>
-                                    <li [ngClass]="{'active': isActive('/smart-lighting')}"><a routerLink="/smart-lighting">Smart Lighting</a></li>
-                                    <li [ngClass]="{'active': isActive('/surveillance-security')}"><a routerLink="/surveillance-security">Surveillance and Security</a></li>
-                                    <li [ngClass]="{'active': isActive('/energy-management')}"><a routerLink="/energy-management">Energy Management</a></li>
-                                    <li [ngClass]="{'active': isActive('/smart-garden')}"><a routerLink="/smart-garden">Smart Garden</a></li>
-                                    <li [ngClass]="{'active': isActive('/climate-control')}"><a routerLink="/climate-control">Climate Control</a></li>
-                                    <li [ngClass]="{'active': isActive('/water-management')}"><a routerLink="/water-management">Water Management</a></li>
+                                    <li [ngClass]="{'active': isActive('/smart-lighting')}"><a
+                                            routerLink="/smart-lighting">Smart Lighting</a></li>
+                                    <li [ngClass]="{'active': isActive('/surveillance-security')}"><a
+                                            routerLink="/surveillance-security">Surveillance and Security</a></li>
+                                    <li [ngClass]="{'active': isActive('/energy-management')}"><a
+                                            routerLink="/energy-management">Energy Management</a></li>
+                                    <li [ngClass]="{'active': isActive('/smart-garden')}"><a
+                                            routerLink="/smart-garden">Smart Garden</a></li>
+                                    <li [ngClass]="{'active': isActive('/climate-control')}"><a
+                                            routerLink="/climate-control">Climate Control</a></li>
+                                    <li [ngClass]="{'active': isActive('/water-management')}"><a
+                                            routerLink="/water-management">Water Management</a></li>
                                 </ul>
                             </li>
                             <li [ngClass]="{'active': isActive('/about')}"><a routerLink="/about">About Us</a></li>
@@ -32,12 +38,15 @@
                                 <a routerLink="/shop"><span>Shop</span></a>
                                 <ul>
                                     <li [ngClass]="{'active': isActive('/shop')}"><a routerLink="/shop">Shop</a></li>
-                                    <li [ngClass]="{'active': isActive('/wishlist')}"><a routerLink="/wishlist">WishList</a></li>
+                                    <li [ngClass]="{'active': isActive('/wishlist')}"><a
+                                            routerLink="/wishlist">WishList</a></li>
                                     <li [ngClass]="{'active': isActive('/cart')}"><a routerLink="/cart">Cart</a></li>
-                                    <li [ngClass]="{'active': isActive('/checkout')}"><a routerLink="/checkout">Checkout</a></li>
+                                    <li [ngClass]="{'active': isActive('/checkout')}"><a
+                                            routerLink="/checkout">Checkout</a></li>
                                 </ul>
                             </li>
-                            <li [ngClass]="{'active': isActive('/price-calculator')}"><a routerLink="/price-calculator">Price Calculator</a></li>
+                            <li [ngClass]="{'active': isActive('/price-calculator')}"><a
+                                    routerLink="/price-calculator">Price Calculator</a></li>
                         </ul>
                         <!-- <ul class="navigation clearfix">
                             <li class="current">
@@ -73,40 +82,50 @@
                 </nav>
                 <!-- Main Menu End-->
                 <div class="outer-box clearfix">
+                    <div *ngIf="aspNetUserId.length > 0; else loginButton" class="d-flex align-items-center">
+                        <div class="cart-btn" [ngClass]="{'scroll-enabled': cartItems.length > 3}">
+                            <a routerLink="/cart">
+                                <i class="icon flaticon-shopping-cart-empty-side-view"></i>
+                                <span class="count">{{ cartItems.length }}</span>
+                            </a>
 
-                    <div class="cart-btn" [ngClass]="{'scroll-enabled': cartItems.length > 3}">
-                        <a routerLink="/cart">
-                            <i class="icon flaticon-shopping-cart-empty-side-view"></i>
-                            <span class="count">{{ cartItems.length }}</span>
-                        </a>
+                            <!-- Shopping Cart Dropdown -->
+                            <div class="shopping-cart" *ngIf="cartItems.length > 0">
+                                <ul class="shopping-cart-items">
+                                    <li class="cart-item" *ngFor="let item of cartItems">
+                                        <img src="assets/userAssets/images/resource/item-thumb-2.jpg" alt="#"
+                                            class="thumb" />
+                                        <span class="item-name">{{ item.productName }}</span>
+                                        <span class="item-quantity">{{ item.quantity }} x
+                                            <span class="item-amount">Rs. {{ item.price }}</span>
+                                        </span>
+                                        <a routerLink="/product-detail" class="product-detail"></a>
+                                        <button class="remove-item"
+                                            (click)="openConfirmationModel(confirmationModal, item.cartId, item.aspNetUserId)">
+                                            <span class="fa fa-times"></span>
+                                        </button>
+                                    </li>
+                                </ul>
 
-                        <!-- Shopping Cart Dropdown -->
-                        <div class="shopping-cart" *ngIf="cartItems.length > 0">
-                            <ul class="shopping-cart-items">
-                                <li class="cart-item" *ngFor="let item of cartItems">
-                                    <img src="assets/userAssets/images/resource/item-thumb-2.jpg" alt="#" class="thumb" />
-                                    <span class="item-name">{{ item.productName }}</span>
-                                    <span class="item-quantity">{{ item.quantity }} x
-                                        <span class="item-amount">Rs. {{ item.price }}</span>
-                                    </span>
-                                    <a routerLink="/product-detail" class="product-detail"></a>
-                                    <button class="remove-item"
-                                        (click)="openConfirmationModel(confirmationModal, item.cartId, item.aspNetUserId)">
-                                        <span class="fa fa-times"></span>
-                                    </button>
-                                </li>
-                            </ul>
-
-                            <div class="cart-footer">
-                                <div class="shopping-cart-total">
-                                    <strong>Total:</strong> Rs. {{ totalAmount }}
+                                <div class="cart-footer">
+                                    <div class="shopping-cart-total">
+                                        <strong>Total:</strong> Rs. {{ totalAmount }}
+                                    </div>
+                                    <a routerLink="/cart" class="theme-btn">View Cart</a>
+                                    <a (click)="proceedToCheckout()" class="theme-btn">Checkout</a>
                                 </div>
-                                <a routerLink="/cart" class="theme-btn">View Cart</a>
-                                <a (click)="proceedToCheckout()" class="theme-btn">Checkout</a>
                             </div>
                         </div>
+                        <div class="logout-btn">
+                            <button class="btn btn-danger" (click)="logout()">Logout</button>
+                          </div>
                     </div>
-
+                    <!-- Show Login Button if Not Logged In -->
+                    <ng-template #loginButton>
+                        <div class="login-btn">
+                            <a routerLink="/login" class="btn btn-primary">Login</a>
+                        </div>
+                    </ng-template>
                 </div>
             </div>
         </div>
@@ -117,7 +136,8 @@
         <div class="outer-box">
             <!--Logo-->
             <div class="logo">
-                <a routerLink="#" title="Sticky Logo"><img src="assets/userAssets/images/sticky-logo.png" alt="Sticky Logo"></a>
+                <a routerLink="#" title="Sticky Logo"><img src="assets/userAssets/images/sticky-logo.png"
+                        alt="Sticky Logo"></a>
             </div>
 
             <!--Nav Outer-->
@@ -144,8 +164,8 @@
     <!-- Mobile Menu  -->
     <div class="mobile-menu">
         <nav class="menu-box">
-            <div class="nav-logo"><a routerLink="index.html"><img src="assets/userAssets/images/logo.png" alt="" title=""
-                        srcset="assets/userAssets/images/logo-white-big.png 2x"></a></div>
+            <div class="nav-logo"><a routerLink="index.html"><img src="assets/userAssets/images/logo.png" alt=""
+                        title="" srcset="assets/userAssets/images/logo-white-big.png 2x"></a></div>
         </nav>
     </div><!-- End Mobile Menu -->
 

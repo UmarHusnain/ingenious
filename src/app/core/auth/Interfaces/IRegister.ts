@@ -1,5 +1,5 @@
 // registration.model.ts
-export interface Address {
+export interface IAddress {
     aspNetUserId: string;
     street: string;
     city: string;
@@ -17,6 +17,6 @@ export interface Address {
     password: string;
     isBlocked: boolean;
     isDeleted: boolean;
-    address: Address;
+    address: IAddress;
   }
   

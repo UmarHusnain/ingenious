@@ -3,9 +3,10 @@ import { Component, effect, HostListener } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CartService } from '../../../core/services/cart.service';
 import { addCart, cartSignal } from '../../../../../store/cartStore';
-import { NgbModule, NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { SharedService } from '../../services/shared.service';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { AuthService } from '../../../core/auth/Services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -24,7 +25,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 })
 export class HeaderComponent {
   isSticky = false;
-  aspNetUserId: string = '9653ee76-abb5-40c7-9ebd-b16ba4af6662'; 
+  aspNetUserId: string = ''; 
   cartItems: any[] = [];
   totalAmount: number = 0;
   cartCount: number = 0;
@@ -44,7 +45,7 @@ export class HeaderComponent {
     private modalService: NgbModal,
     private sharedService: SharedService,
     private router: Router,
-
+    private authService: AuthService
   ) 
   {
     effect(() => {
@@ -54,7 +55,10 @@ export class HeaderComponent {
   }
 
   ngOnInit() {
-    this.loadCart();
+    this.aspNetUserId = this.authService.getAspNetUserId();
+    if (this.authService.isAuthenticated()) {
+      this.loadCart();
+    }
   }
 
   loadCart() {
@@ -166,4 +170,9 @@ export class HeaderComponent {
       return currentUrl === route || currentUrl.startsWith(route + '/');
     }
     
+    logout() {
+      this.authService.logOut();
+      this.cartItems = [];
+      this.router.navigate(['/login']);
+    }
 }
