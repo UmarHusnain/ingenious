@@ -1,0 +1,48 @@
+<div id="viewUserModal">
+    <div class="modal-header">
+      <h5 class="modal-title">User Details</h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+    </div>
+      
+    <div *ngIf="isLoading" class="spinner-overlay">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    
+      <div class="modal-body" *ngIf="!isLoading">
+<div class="user-profile">
+    <!-- User Name and Account Dates -->
+    <div class="user-header">
+      <h2>{{ user.fullName }}</h2>
+      <p>
+        <strong>Account Created:</strong> {{ user.createdAt | date: 'dd MMM yyyy' }} |
+        <strong>Last Updated:</strong> {{ user.updatedAt | date: 'dd MMM yyyy' }}
+      </p>
+    </div>
+  
+    <!-- Personal Details -->
+    <div class="personal-details">
+      <h3>Personal Details</h3>
+      <ul>
+        <li><strong>Email:</strong> {{ user.email }}</li>
+        <li><strong>Username:</strong> {{ user.userName }}</li>
+        <li><strong>Phone Number:</strong> {{ user.phoneNumber }}</li>
+      </ul>
+    </div>
+  
+    <!-- Address Information -->
+    <div class="address-info">
+      <h3>Address</h3>
+      <ul>
+        <li><strong>Street:</strong> {{ user.street }}</li>
+        <li><strong>City:</strong> {{ user.city }}</li>
+        <li><strong>State:</strong> {{ user.state }}</li>
+        <li><strong>Postal Code:</strong> {{ user.postalCode }}</li>
+        <li><strong>Country:</strong> {{ user.country }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+  

@@ -4,10 +4,11 @@ import { ProductsService } from '../../../Services/products.service';
 import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
-import { IProduct } from '../../../Interfaces/IProduct';
+import { IProduct, ProductImage, ProductVariation } from '../../../Interfaces/IProduct';
 import { CategoriesService } from '../../../Services/categories.service';
 import { ICategory } from '../../../Interfaces/ICategory';
 import { IUpdateProduct } from '../../../Interfaces/IProduct';
+import { IAddProductRequest } from '../../../Interfaces/IAddProduct';
 @Component({
   selector: 'app-edit-product',
   standalone: true,
@@ -83,30 +84,71 @@ export class EditProductComponent {
     }
   }
   submitForm(){
-    if (this.productForm.invalid || !this.product?.productId) return;
-
-    this.isLoading = true;
-    const updatedProduct: IUpdateProduct = {
-      name:this.product.name,
-      categoryId:this.product.categoryId,
-      description:this.product.description,
-      price:this.product.price,
-      discount:this.product.discount,
-      stock:this.product.stock,
-      slug: this.product.name.toLowerCase().replace(/\s+/g, '-') // Keep existing slug
+    console.log("updated product",this.product)
+    if (!this.product) {
+      this.showAlertMessage("No product data available for update.",'error')
+      console.error("No product data available for update.");
+      return;
+    }
+  
+    const updatedProductRequest: IAddProductRequest = {
+      product: {
+        categoryId: this.product.categoryId,
+        name: this.product.name,
+        slug: this.product.slug,
+        description: this.product.description,
+        price: this.product.price,
+        discount: this.product.discount,
+        stock: this.product.stock
+      },
+      images: this.product.productImages.map((img: ProductImage) => ({
+        productId: img.productId,
+        imageUrl: img.imageUrl,
+        isDefault: img.isDefault
+      })),
+      variations: this.product.productVariations.map((variation: ProductVariation) => ({
+        productId: variation.productId,
+        variationName: variation.variationName,
+        price: variation.price,
+        stock: variation.stock
+      }))
     };
-
-    this.productService.updateProduct(this.product.productId, updatedProduct).subscribe({
-      next: () => {
-        this.showAlertMessage('Product updated successfully','success');
-        this.isLoading = false;
-        this.activeModal.close(true);
+  
+    this.productService.updateCompleteProduct(this.product.productId, updatedProductRequest).subscribe({
+      next: (response) => {
+        this.showAlertMessage("Product updated successfully",'success')
+        console.log("Product updated successfully", response);
+        // Add navigation or UI updates here
       },
       error: (error) => {
-        this.showAlertMessage('Error updating product', 'error');
-        this.isLoading = false;
+        this.showAlertMessage("Error updating product",'error')
+        console.error("Error updating product", error);
       }
-    });  
+    });
+    // if (this.productForm.invalid || !this.product?.productId) return;
+
+    // this.isLoading = true;
+    // const updatedProduct: IUpdateProduct = {
+    //   name:this.product.name,
+    //   categoryId:this.product.categoryId,
+    //   description:this.product.description,
+    //   price:this.product.price,
+    //   discount:this.product.discount,
+    //   stock:this.product.stock,
+    //   slug: this.product.name.toLowerCase().replace(/\s+/g, '-') // Keep existing slug
+    // };
+
+    // this.productService.updateProduct(this.product.productId, updatedProduct).subscribe({
+    //   next: () => {
+    //     this.showAlertMessage('Product updated successfully','success');
+    //     this.isLoading = false;
+    //     this.activeModal.close(true);
+    //   },
+    //   error: (error) => {
+    //     this.showAlertMessage('Error updating product', 'error');
+    //     this.isLoading = false;
+    //   }
+    // });  
   }
   triggerFileInput() {
     const fileInput = document.getElementById('productImages') as HTMLInputElement;

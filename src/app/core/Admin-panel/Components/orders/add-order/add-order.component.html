@@ -1,0 +1,100 @@
+<!-- add-order.component.html -->
+<div id="cancel_appointment">
+    @if (isLoading) {
+        <div class="spinner-overlay">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        }
+        
+        @if (showAlert) {
+        <div style="z-index: 999999;" class="alert alert-dismissible fade show center-alert"
+            [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
+            {{ alertMessage }}
+            <button type="button" class="btn-close" aria-label="Close" (click)="closePopupMsg()">x</button>
+        </div>
+        }
+    <div class="modal-header">
+      <h2 class="modalTitle">Purchase Product</h2>
+      <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close">x</button>
+    </div>
+  
+    <div class="modal-body">
+      <form >
+        <div class="service-fields mb-3">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="mb-3">
+                <label class="mb-2">Product <span class="text-danger">*</span></label>
+                <select class="form-select form-control" [(ngModel)]="newOrder.productId" name="productId" (change)="onProductSelect(newOrder.productId)" required>
+                  <option value="">Select Product</option>
+                  <option *ngFor="let product of products" [value]="product.productId">
+                    {{ product.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="mb-2">Variation <span class="text-danger">*</span></label>
+                <select class="form-select form-control" [(ngModel)]="newOrder.variationId" name="variationId" (change)="OnVariationChange(newOrder.variationId)" required>
+                  <option value="">Select Variation</option>
+                  <option *ngFor="let variation of variations" [value]="variation.variationId">
+                    {{ variation.variationName }}
+                  </option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label>Quantity<span class="text-danger">*</span></label>
+                <input type="number" class="form-control" [(ngModel)]="newOrder.quantity" name="quantity" min="1" required />
+              </div>
+              <div class="mb-3">
+                <label>Price</label>
+                <input type="number" class="form-control" [(ngModel)]="newOrder.price" name="price" min="1" required disabled/>
+              </div>
+              <div class="mb-3">
+                <label>Discount(%)</label>
+                <input type="number" class="form-control" [(ngModel)]="newOrder.discount" name="discount" min="1" required disabled/>
+              </div>
+              <div class="mb-3">
+                <label>Total Amount</label>
+                <input type="number" class="form-control" [(ngModel)]="newOrder.totalAmount" name="totalAmount" disabled />
+              </div>
+            </div>
+            <div class="col-lg-8 purchaseItemTable">
+              <div class="mb-3">
+                <table class="table table-hover table-bordered tabled-stripped">
+                  <thead>
+                    <tr>
+                      <th>Sr#</th>
+                      <th>Product</th>
+                      <th>Variation</th>
+                      <th>Quantity</th>
+                      <th>Price</th>
+                      <th>Sub-Total</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of orderItems; let i = index">
+                      <td>{{ i + 1 }}</td>
+                      <td>{{ getProductNameById(item.productId) }}</td>
+                      <td>{{ getVariationNameById(item.variationId) }}</td>
+                      <td>{{ item.quantity }}</td>
+                      <td>{{ item.price }}</td>
+                      <td>{{ item.subtotal }}</td>
+                      <td>
+                        <i (click)="removeOrderItem(i,item.subtotal)" class="fa fa-minus-circle text-danger" style="cursor: pointer;"></i>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="submit-section">
+          <button class="btn btn-primary" name="form_submit" value="submit" (click)="onSubmit()">Submit</button>
+          <button class="btn btn-success" name="add_order" value="add" (click)="addOrderItem()">Add Order</button>
+        </div>
+   
+  

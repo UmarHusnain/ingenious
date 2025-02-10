@@ -1,0 +1,64 @@
+<!-- Page Header -->
+<div class="modal-header">
+    <h2 class="modalTitle">Order Detail</h2>
+    <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+  </div>
+
+  <div class="modal-body">
+  
+  <!-- Order Information -->
+  <div *ngIf="order; else noData" class="order-wrap">
+    <div class="order-info">
+      <div class="user-order">
+        <h6>#{{ order.orderId }}</h6>
+        <h6>Payment Status: {{order.paymentStatus}}</h6>
+        <h6>Order Status: {{order.orderStatus}} </h6>
+        <ul>
+          <li><i>Rs.</i>Total Amount: {{ order.totalAmount }}</li>
+          <li><i class="fa-solid fa-calculator"></i>Total Items: {{ order.orderItems.length }}</li>
+          <li><i class="fa-solid fa-calendar-days"></i> Order Date: {{ order.createdAt | date: 'EE dd MMM yyyy' }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <ng-template #noData>
+    <p>No order data found!</p>
+  </ng-template>
+  
+  <!-- Order Items Table -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">Order Items</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="datatable table table-hover table-center mb-0">
+              <thead>
+                <tr>
+                  <th>Sr#</th>
+                  <th>Product</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of order.orderItems; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>
+                  
+                      {{ findProductname(item.productId) }}
+        
+                  </td>
+                  <td>{{ item.quantity }}</td>
+                  <td>Rs.{{ item.price }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  

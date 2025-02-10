@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { AddProductComponent } from './add-product/add-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 @Component({
   selector: 'app-products',
   standalone: true,
@@ -61,7 +62,11 @@ navigateToAddProduct(){
     product.isActive = !product.isActive; 
   }
   openViewProductModal(product:any){
-
+    const modalRef = this.modalService.open(
+      ProductDetailsComponent,
+      this.modalOptions
+    );
+    modalRef.componentInstance.product = product;
   }
   openEditProductModal(product:any){
     const modalRef = this.modalService.open(

@@ -1,0 +1,58 @@
+<div class="product-view">
+        <div class="modal-header">
+            <h2 class="modalTitle">Product Details</h2>
+            <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close">x</button>
+        </div>
+        <div class="modal-body">
+    <!-- Image Carousel -->
+    <div class="image-carousel">
+      <button (click)="prevImage()" class="btn btn-secondary"><i class="fas fa-arrow-left"></i></button>
+      <img [src]="currentImage?.imageUrl" alt="Product Image" class="product-image">
+      <button (click)="nextImage()" class="btn btn-secondary"> <i class="fas fa-arrow-right"></i></button>
+    </div>
+  
+    <!-- Product Details -->
+    <div class="product-details">
+      <div class="row">
+        <div class="col-md-8">
+            <!-- <p><strong>Product Name:</strong> ${{ product.name}}</p>
+            <p><strong>Product Description:</strong> ${{ product.description }}</p> -->
+          <h2> {{ product.name }}</h2>
+          <p>{{ product.description }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+          <p><strong>Price:</strong> ${{ product.price }}</p>
+          <p><strong>Stock:</strong> {{ product.stock }}</p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Discount:</strong> {{ product.discount }}%</p> 
+            <p><strong>Category:</strong> {{ product.category.name }}</p> 
+        </div>
+    </div>
+    </div>
+   <!-- Product Variations Table -->
+<table id="variationsTable" class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Variation Name</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let variation of product.productVariations">
+        <td>{{ variation.variationName }}</td>
+        <td>{{ variation.price | currency }}</td>
+        <td>{{ variation.stock }}</td>
+        <td>
+          <input type="checkbox" [(ngModel)]="variation.isActive" >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+   
+</div>
+</div>

@@ -23,6 +23,7 @@ import { SignupComponent } from './core/auth/components/signup/signup.component'
 import { CategoriesComponent } from './core/Admin-panel/Components/categories/categories.component';
 import { AddCategoryComponent } from './core/Admin-panel/Components/categories/add-category/add-category.component';
 import { ProductsComponent } from './core/Admin-panel/Components/products/products.component';
+import { OrdersComponent } from './core/Admin-panel/Components/orders/orders.component';
 export const routes: Routes = [
   {
     path: 'admin',
@@ -36,6 +37,7 @@ export const routes: Routes = [
         path: '',
         component: DashboardComponent,
       },
+  
       {
         path: 'user',
         component: UserComponent,
@@ -51,6 +53,10 @@ export const routes: Routes = [
         path: 'products',
         component: ProductsComponent,
       },
+      {
+        path: 'orders',
+        component: OrdersComponent,
+      }
     ]
   },
   {

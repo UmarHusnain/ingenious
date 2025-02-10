@@ -23,4 +23,8 @@ export class ProductsService {
     const url = `${this.apiUrl}/UpdateProduct/${id}`;
     return this.http.put(url, productData);
   }
+  updateCompleteProduct(id: number, productData: IAddProductRequest): Observable<any> {
+    const url = `${this.apiUrl}/UpdateCompleteProduct/${id}`;
+    return this.http.put(url, productData);
+  }
 }

@@ -1,0 +1,80 @@
+@if (isLoading) {
+    <div class="spinner-overlay">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    }
+    
+    @if (showAlert) {
+    <div style="z-index: 999999;" class="alert alert-dismissible fade show center-alert"
+        [ngClass]="{'alert-success': alertType === 'success', 'alert-danger': alertType === 'error'}" role="alert">
+        {{ alertMessage }}
+        <button type="button" class="btn-close" aria-label="Close" (click)="closePopupMsg()"></button>
+    </div>
+    }
+  <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- <div class="row"> -->
+          <div class="col-10"></div>
+          <div class="col-2 mb-2 mt-2">
+              <button class="btn-lg btn-primary" (click)="navigateToAddOrders()">Add orders</button>
+          <!-- </div> -->
+      </div>
+          <div class="col-12">
+              <div class="card">
+                  <div class="card-header">
+                  </div>
+                  <!-- /.card-header -->
+                  <div class="card-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                      <thead>
+                      <tr>
+                        <th>Sr#</th>
+                        <th>Total Amount</th>
+                        <th>Order Status</th>
+                        <th>Payment Status</th>
+                        <th>createdAt</th>
+                        <th>Actions</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let order of orders; let i = index">
+                          <td>{{ i + 1 }}</td>
+                          <td>{{ order.totalAmount }}</td>
+                          <td [ngClass]="{'text-danger': order.orderStatus === 'Failed'}">{{ order.orderStatus }}</td>
+                          <td [ngClass]="{'text-danger': order.paymentStatus === 'Failed'}">{{order.paymentStatus}}</td>
+                          <td>{{order.createdAt | date: 'yyyy-MM-dd HH:mm'}}</td>
+                          <!-- <td>
+                            <div class="form-check form-switch d-flex">
+                              <input type="checkbox" id="flexSwitchCheckDefault"
+                              class="form-check-input" [(ngModel)]="order.isActive" (change)="toggleStatus(order)"> -->
+                              <!-- <span class="slider round"></span> -->
+                            <!-- </div>
+                          </td> -->
+                          <td>
+                            <div class="actions">
+                              <a class="btn btn-sm bg-default-light mx-2" (click)="openVieworderModal(order)">
+                                <i class="fa-solid fa-eye"></i>
+                              </a>
+                              <a class="btn btn-sm bg-success-light" (click)="openEditorderModal(order)">
+                                <i class="fas fa-pencil-alt"></i>
+                              </a>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+            <!-- /.card -->
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
